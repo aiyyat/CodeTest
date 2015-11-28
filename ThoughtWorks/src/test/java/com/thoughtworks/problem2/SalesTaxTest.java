@@ -1,4 +1,4 @@
-package com.thoughtworks;
+package com.thoughtworks.problem2;
 
 import java.math.BigDecimal;
 
