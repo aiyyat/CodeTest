@@ -1,6 +1,6 @@
 package com.thoughtworks.problem1.rover.exception;
 
-public class IllegalDirectionCharacterException extends RuntimeException {
+public class IllegalDirectionCharacterException extends RoverException {
 	private static final long serialVersionUID = 5912217470241898067L;
 
 	public IllegalDirectionCharacterException(char dir) {
