@@ -1,7 +1,6 @@
 package com.hackerrank.search.sherlockandarray;
 
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
