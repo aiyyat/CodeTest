@@ -10,13 +10,18 @@ import com.technicalyorker.algorithms.utilities.Util;
 import junit.framework.TestCase;
 
 public class SortingTest {
+	int[] init;
 	int[] shuffled;
-	int size = 60000;
+	int size = 100000;
+
+	public SortingTest() {
+		init = Util.initialize(size);
+		Shuffling.shuffle(init);
+	}
 
 	@Before
 	public void init() {
-		shuffled = Util.initialize(size);
-		Shuffling.shuffle(shuffled);
+		shuffled = init.clone();
 	}
 
 	@Test(expected = AssertionError.class)
@@ -42,6 +47,11 @@ public class SortingTest {
 	@Test
 	public void testQuick() {
 		testSort(new QuickSort());
+	}
+
+	@Test
+	public void testMerge() {
+		testSort(new MergeSort());
 	}
 
 	private void testSort(Sortable algorithm) {

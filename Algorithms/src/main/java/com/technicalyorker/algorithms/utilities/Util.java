@@ -46,4 +46,18 @@ public class Util {
 		}
 		return true;
 	}
+
+	public static void print(int[] a, int start, int end, int median) {
+		for (int i = start; i < end; i++) {
+			if (i > start) {
+				System.out.print(" ");
+			}
+			if (i == median) {
+				System.out.print("[" + a[i] + "]");
+			} else {
+				System.out.print(a[i]);
+			}
+		}
+		System.out.println();
+	}
 }
