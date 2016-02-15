@@ -1,15 +1,17 @@
 package com.technicalyorker.algorithms.sorting;
 
-import com.technicalyorker.algorithms.utilities.Util;
-
 public class MergeSort implements Sortable {
+	private static int[] copy = null;
 
-	public void sort(int[] a) {
+	public synchronized void sort(int[] a) {
+		copy = new int[a.length];
 		split(a, 0, a.length);
 	}
 
 	public static void merge(int[] a, int start, int end, int median) {
-		int[] copy = a.clone();
+		for (int i = start; i < end; i++) {
+			copy[i] = a[i];
+		}
 		int i = start;
 		int j = median;
 		int index = start;
@@ -27,7 +29,6 @@ public class MergeSort implements Sortable {
 				a[index++] = copy[i++];
 			}
 		}
-		// Util.print(a);
 	}
 
 	public static void split(int[] a, int start, int end) {
@@ -37,12 +38,11 @@ public class MergeSort implements Sortable {
 		}
 		split(a, start, median);
 		split(a, median, end);
-		// Util.print(a, start, end, median);
 		merge(a, start, end, median);
 	}
 
 	public static void main(String[] args) {
 		int[] a = new int[] { 9, 8, 0, 7, 6, 3, 5, 2, 4, 1 };
-		split(a, 0, a.length);
+		new MergeSort().sort(a);
 	}
 }
