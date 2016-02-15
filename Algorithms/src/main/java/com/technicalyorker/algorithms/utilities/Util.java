@@ -60,4 +60,11 @@ public class Util {
 		}
 		System.out.println();
 	}
+
+	public static int greaterIndex(int[] a, int left, int right) {
+		if (a[left] < a[right]) {
+			return right;
+		}
+		return left;
+	}
 }

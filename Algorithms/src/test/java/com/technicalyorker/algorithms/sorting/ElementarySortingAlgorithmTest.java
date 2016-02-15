@@ -2,6 +2,7 @@ package com.technicalyorker.algorithms.sorting;
 
 import java.util.Calendar;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,18 +10,23 @@ import com.technicalyorker.algorithms.utilities.Util;
 
 import junit.framework.TestCase;
 
-public class SortingTest {
+public class ElementarySortingAlgorithmTest {
 	int[] init;
 	int[] shuffled;
 	int size = 100000;
 
-	public SortingTest() {
+	public ElementarySortingAlgorithmTest() {
 		init = Util.initialize(size);
 		Shuffling.shuffle(init);
 	}
 
 	@Before
-	public void init() {
+	public void setup() {
+		shuffled = init.clone();
+	}
+
+	@After
+	public void shutdown() {
 		shuffled = init.clone();
 	}
 
