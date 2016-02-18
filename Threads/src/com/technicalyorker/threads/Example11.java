@@ -1,20 +1,19 @@
 package com.technicalyorker.threads;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 /**
- * Now it works since List is synchronized.
+ * Now this works.
  * 
  * @author achuth
  *
  */
-public class Example08 {
-	private List<Double> list = Collections.synchronizedList(new ArrayList<Double>());
+public class Example11 {
+	private Integer anInt = new Integer(0);
+	private Object lock = new Object();
 
 	private void addElement() {
-		list.add(Math.random());
+		synchronized (lock) {
+			anInt++;
+		}
 	}
 
 	private void perform() {
@@ -46,10 +45,10 @@ public class Example08 {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		System.out.println(list.size());
+		System.out.println(anInt);
 	}
 
 	public static void main(String[] args) {
-		new Example08().perform();
+		new Example11().perform();
 	}
 }

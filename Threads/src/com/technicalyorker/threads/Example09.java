@@ -1,24 +1,19 @@
 package com.technicalyorker.threads;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Now even though the Integer variable is used to lock it behaves wierd. Its
- * better to use a lock variable separate from the integer itself. This is a
- * better practice in all cases since you never know if java has done something
- * to optimize your original variable to something else while incrementing for
- * example in case of an integer etc. Java only ensures that the end result of
- * the variable is correct. Hence its always safer to use a variable explicitely
- * for locking.
+ * Now it works since Vector is synchronized.
  * 
  * @author achuth
  *
  */
 public class Example09 {
-	private Integer anInt = new Integer(0);
+	private List<Double> list = new ArrayList<Double>();
 
-	private void addElement() {
-		synchronized (anInt) {
-			anInt++;
-		}
+	private synchronized void addElement() {
+		list.add(Math.random());
 	}
 
 	private void perform() {
@@ -50,7 +45,7 @@ public class Example09 {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		System.out.println(anInt);
+		System.out.println(list.size());
 	}
 
 	public static void main(String[] args) {

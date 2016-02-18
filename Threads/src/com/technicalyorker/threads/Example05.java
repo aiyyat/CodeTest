@@ -1,24 +1,15 @@
 package com.technicalyorker.threads;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * This example sometimes throws the following error:
- * 
- * Exception in thread "Thread-0" java.lang.ArrayIndexOutOfBoundsException: 9369
- * at java.util.ArrayList.add(ArrayList.java:441) at
- * com.technicalyorker.threads.Example5.addElement(Example5.java:10) at
- * com.technicalyorker.threads.Example5.access$0(Example5.java:9) at
- * com.technicalyorker.threads.Example5$1.run(Example5.java:20) 13587
- * 
- * Since the ArrayList itself is not thread safe.
  * 
  * @author achuth
  *
  */
 public class Example05 {
-	private List<Double> list = new ArrayList<Double>();
+	private List<Double> list = new CopyOnWriteArrayList<Double>();
 
 	private void addElement() {
 		list.add(Math.random());
