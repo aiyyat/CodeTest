@@ -12,7 +12,11 @@ import java.util.List;
  * com.technicalyorker.threads.Example5.access$0(Example5.java:9) at
  * com.technicalyorker.threads.Example5$1.run(Example5.java:20) 13587
  * 
- * Since the ArrayList itself is not thread safe.
+ * This is due to the ArrayList implementation. Internally ArrayList uses Arrays
+ * which is initialized with a default size. When it exceeds the Array size is
+ * more than doubled and elements copied into the new array, which gets used
+ * thereafter. During this time of array resizing and copying + Non Thread safe
+ * nature of ArrayList internal objects results in ArrayIndexOutOfBound
  * 
  * @author achuth
  *

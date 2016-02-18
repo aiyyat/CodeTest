@@ -1,20 +1,22 @@
 package com.technicalyorker.threads;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Now this works.
+ * Now even though the Integer variable is used to lock it behaves wierd. Its
+ * better to use a lock variable separate from the integer itself. This is a
+ * better practice in all cases since you never know if java has done something
+ * to optimize your original variable to something else while incrementing for
+ * example in case of an integer etc. Java only ensures that the end result of
+ * the variable is correct. Hence its always safer to use a variable explicitely
+ * for locking.
  * 
  * @author achuth
  *
  */
 public class Example10 {
 	private Integer anInt = new Integer(0);
-	private Object lock = new Object();
 
 	private void addElement() {
-		synchronized (lock) {
+		synchronized (anInt) {
 			anInt++;
 		}
 	}
