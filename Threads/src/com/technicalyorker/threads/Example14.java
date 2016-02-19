@@ -1,14 +1,14 @@
 package com.technicalyorker.threads;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
-public class Example13 {
-	List<Double> i = new LinkedList<Double>();
+public class Example14 {
+	BlockingQueue<Double> i = new LinkedBlockingQueue<Double>(10);
 	Object lock = new Object();
 
 	public static void main(String[] args) {
-		new Example13().perform();
+		new Example14().perform();
 	}
 
 	private void perform() {
@@ -27,6 +27,11 @@ public class Example13 {
 			}
 		};
 		producer.start();
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
 		consumer.start();
 		try {
 			producer.join();
@@ -38,15 +43,8 @@ public class Example13 {
 
 	private void add() {
 		try {
-			synchronized (lock) {
-				if (i.size() == 10) {
-					lock.wait();
-				} else {
-					i.add(Math.random());
-					System.out.println("After Add Size: " + i.size());
-					lock.notify();
-				}
-			}
+			i.put(Math.random());
+			System.out.println("After Add Size: " + i.size());
 			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -55,15 +53,8 @@ public class Example13 {
 
 	private void remove() {
 		try {
-			synchronized (lock) {
-				if (i.size() == 0) {
-					lock.wait();
-				} else {
-					i.remove(0);
-					System.out.println("After Remove Size: " + i.size());
-				}
-				lock.notify();
-			}
+			i.remove();
+			System.out.println("After Remove Size: " + i.size());
 			Thread.sleep(700);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
