@@ -2,6 +2,17 @@ package com.technicalyorker.threads;
 
 import java.util.Scanner;
 
+/**
+ * Wait and Notify example. When wait is called the thread hands over the lock
+ * away and waits for the notify to get called. Once it gets notified it
+ * resumes.
+ * 
+ * This is unlike Thread.sleep() which takes it lock along with it. Wait also
+ * comes with a version which takes time as a parameter.
+ * 
+ * @author achuth
+ *
+ */
 public class Example12 {
 	Object account = new Object();
 
