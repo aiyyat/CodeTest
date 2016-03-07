@@ -2,7 +2,6 @@ package com.technicalyorker.algorithms.graphs;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.Stack;
 
 /**
  * Finding a path using Depth first search.
@@ -10,48 +9,20 @@ import java.util.Stack;
  * @author achuth
  *
  */
-public class DepthFirstSearch {
-	private int root;
-	private Graph g;
-	boolean[] marked;
-	int[] connections;
-	private Stack<Integer> s = new Stack<Integer>();
+public class DepthFirstSearch extends GraphSearch {
 
 	public DepthFirstSearch(Graph g, int root) {
-		this.g = g;
-		this.root = root;
-		marked = new boolean[g.getEdges()];
-		connections = new int[g.getEdges()];
-		marked[root] = true;
-		formConnections(root);
+		super(g, root);
 	}
 
-	private void formConnections(int parent) {
-		for (int a : g.adj(parent)) {
+	protected void formConnections(int parent) {
+		for (int a : getG().adj(parent)) {
 			if (!marked[a]) {
 				connections[a] = parent;
 				marked[a] = true;
 				formConnections(a);
 			}
 		}
-	}
-
-	public Stack<Integer> printConnection(int end) {
-		if (marked[end]) {
-			return check(end);
-		} else {
-			System.out.println("No Connection");
-			return null;
-		}
-	}
-
-	private Stack<Integer> check(int end) {
-		s.push(end);
-		if (end != root) {
-			int parent = connections[end];
-			check(parent);
-		}
-		return s;
 	}
 
 	public static void main(String[] args) {
