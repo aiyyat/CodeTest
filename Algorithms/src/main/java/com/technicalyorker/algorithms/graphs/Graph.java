@@ -37,7 +37,6 @@ public class Graph {
 
 	public void print() {
 		for (int i = 0; i < elements.length; i++) {
-			System.out.println(i + "->" + elements[i]);
 		}
 	}
 
