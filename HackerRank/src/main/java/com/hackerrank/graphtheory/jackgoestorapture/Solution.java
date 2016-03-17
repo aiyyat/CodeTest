@@ -1,16 +1,17 @@
 package com.hackerrank.graphtheory.jackgoestorapture;
 
 import java.io.InputStream;
-import java.util.Arrays;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Scanner;
 
 public class Solution {
 
 	public static void main(String[] args) {
-		new Solution().perform(System.in);
+		System.out.println(new Solution().perform(System.in));
 	}
 
 	int V;
@@ -18,19 +19,21 @@ public class Solution {
 	List<Edge>[] vs;
 	int begin = 1;
 	int end;
+	static long then;
 
-	public void perform(InputStream is) {
+	public String perform(InputStream is) {
 		Scanner s = new Scanner(is);
 		try {
 			end = s.nextInt();
 			V = end + 1;
 			E = s.nextInt();
-			paidTillStation = new int[V];
+			distance = new int[V];
 			vs = new LinkedList[V];
+			qc = new boolean[V];
 			for (int i = 0; i < V; i++) {
 				vs[i] = new LinkedList<Edge>();
 				if (i > 1) {
-					paidTillStation[i] = Integer.MAX_VALUE;
+					distance[i] = Integer.MAX_VALUE;
 				}
 			}
 			for (int i = 0; i < E; i++) {
@@ -41,37 +44,40 @@ public class Solution {
 				vs[other].add(new Edge(other, one, weight));
 			}
 			q.add(begin);
-			perform(begin, visited);
-			if (paidTillStation[end] == Integer.MAX_VALUE) {
-				System.out.println("NO PATH EXISTS");
-			} else {
-				System.out.println(paidTillStation[end]);
+			perform();
+			if (distance[end] != Integer.MAX_VALUE) {
+				return "" + distance[end];
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			s.close();
 		}
+		return "NO PATH EXISTS";
 	}
 
-	Queue<Integer> q = new LinkedList<Integer>();
-	int[] paidTillStation;
+	Queue<Integer> q = new PriorityQueue<Integer>();
+	int[] distance;
 
-	private void perform(int parent) {
-		if (parent == end) {
-			System.out.println();
-			return;
-		}
-		System.out.print(parent + "->");
-		for (Edge e : vs[parent]) {
-			if (!e.visited) {
-				e.visited = true;
+	private void perform() {
+		while (!q.isEmpty()) {
+			int first = q.poll();
+			qc[first] = false;
+			for (Edge e : vs[first]) {
 				int other = e.other;
-				paidTillStation[other] = Math.min(paidTillStation[other], Math.max(paidTillStation[parent], e.w));
-				perform(other);
+				int max = Math.max(e.w, distance[first]);
+				if (distance[other] > max) {
+					distance[other] = max;
+					if (!qc[other]) {
+						q.add(other);
+					}
+					qc[other] = true;
+				}
 			}
 		}
 	}
+
+	boolean[] qc;
 
 	class Edge {
 		int w;
