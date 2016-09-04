@@ -1,22 +1,17 @@
 ﻿Advanced MultiThreading
-	
-
+        
 The Need for Volatility:
 Some JVMs try to perform Optimization by virtue of Variable Caching it when it comes to threads, that tend to behave as if no other thread would be expected to be modifying the variable. These Thread Cached Variables are local copies to threads; Hence a change from outside the thread is not visible to the thread itself. The following program without volatile could potentially run into an infinite loop with some JVMs.
 https://github.com/technicalyorker/misc/blob/master/Threads/src/com/technicalyorker/threads/Example01.java
-
 Problems that can arise out of variables shared between multiple threads:
 Messed up Amount: Imagine two threads trying to deposit money into the same accounts. The following example depicts the problem of vanishing money when done simulataneously by multiple threads.
 Incrementing the value of an Integer using the ++ operator for example has been among the major leaps in C++ from C, which was adopted in Java like most other C++ constructs. As we know the operator does its job in not 1 but 3 separate steps. Hence let’s say two threads simultaneously reads the value of integer variable amount(initially 0).Let us now assume within both the threads the value of the variable is read simultaneously. Now thread A increments the value and sets it back to the variable making it sound 1. Thread B springs into action incrementing the value 0 to 1 and setting it back to the amount. In effect, two increment operations only manages to set the value of the amount to 1 instead of 2.
 https://github.com/technicalyorker/misc/blob/master/Threads/src/com/technicalyorker/threads/Example02.java
-
 Synchronized Blocks are here to rescue: 
 https://github.com/technicalyorker/misc/blob/master/Threads/src/com/technicalyorker/threads/Example03.java
-
 Using Atomic Variables: 
 https://github.com/technicalyorker/misc/blob/master/Threads/src/com/technicalyorker/threads/Example04.java
 Note: Synchronized methods are as good as Synchronized blocks around the ‘this’ object as far as the whole method is concerned. The block of code protected from this simultaneous multi thread access is called a Critical Section.
-
 ArrayList, we have ever known that unlike Vectors are not Synchronized.
 Now for some fiddling with ArrayList with multiple threads – exactly what they are not designed to do:
 The Case of Missing Elements and ArrayIndexOutOfBound.
@@ -45,7 +40,6 @@ https://github.com/technicalyorker/misc/blob/master/Threads/src/com/technicalyor
 Now even though the Integer variable is used to lock it behaves wierd. Cause is all that mentioned in the above on the ‘++’ operator.
 Lock Variable:Its better to use a lock variable separate from the Integer itself. This is a better practice in all cases since you never know if java has done something to optimize your original variable to something else while incrementing for example in case of an integer etc. Java only ensures that the end result of the variable is correct. Hence its always safer to use a variable explicitely for locking.
 https://github.com/technicalyorker/misc/blob/master/Threads/src/com/technicalyorker/threads/Example11.java
-
 Wait & Notify:
 https://github.com/technicalyorker/misc/blob/master/Threads/src/com/technicalyorker/threads/Example12.java
 Producer Consumer Model:
@@ -57,7 +51,6 @@ Dead Lock:
 As we all know creating a dead lock is not very difficult.😉 Just be careful to not do exact copy paste of code block that does synchronization.
 https://github.com/technicalyorker/misc/blob/master/Threads/src/com/technicalyorker/threads/Example15.java
 To ensure a dead lock never occurs just remember to keep the attainment of the order of the locks the same.
-	
 synchronized (a) {
     synchronized (b) {
         System.out.println("hi there..");
