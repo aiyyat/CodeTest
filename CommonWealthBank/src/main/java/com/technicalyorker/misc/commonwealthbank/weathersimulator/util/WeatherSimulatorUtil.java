@@ -1,5 +1,7 @@
 package com.technicalyorker.misc.commonwealthbank.weathersimulator.util;
 
+import static com.technicalyorker.misc.commonwealthbank.weathersimulator.domain.Condition.values;
+
 import java.text.DecimalFormat;
 import java.util.Random;
 
@@ -21,7 +23,7 @@ public class WeatherSimulatorUtil {
 	}
 
 	public static Condition anyCondition() {
-		return Condition.values()[random.nextInt(999) % 3];
+		return values()[random.nextInt(999) % 3];
 	}
 
 	public static String anyIntegerString() {
