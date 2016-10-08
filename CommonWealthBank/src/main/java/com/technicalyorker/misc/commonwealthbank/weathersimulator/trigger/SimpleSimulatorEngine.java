@@ -6,9 +6,9 @@ import com.technicalyorker.misc.commonwealthbank.weathersimulator.domain.Positio
 import com.technicalyorker.misc.commonwealthbank.weathersimulator.emitter.Emitter;
 import com.technicalyorker.misc.commonwealthbank.weathersimulator.service.WeatherService;
 
-public class SimpleSimEngine extends AbstractWeatherEngine {
+public class SimpleSimulatorEngine extends AbstractWeatherEngine {
 
-	public SimpleSimEngine(WeatherService service, Emitter emitter) {
+	public SimpleSimulatorEngine(WeatherService service, Emitter emitter) {
 		super(service, emitter);
 	}
 

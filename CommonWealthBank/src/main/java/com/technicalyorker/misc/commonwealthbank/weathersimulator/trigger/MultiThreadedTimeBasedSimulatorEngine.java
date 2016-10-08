@@ -1,21 +1,26 @@
 package com.technicalyorker.misc.commonwealthbank.weathersimulator.trigger;
 
+import java.time.LocalTime;
 import java.util.Calendar;
 
 import com.technicalyorker.misc.commonwealthbank.weathersimulator.domain.Position;
 import com.technicalyorker.misc.commonwealthbank.weathersimulator.emitter.Emitter;
 import com.technicalyorker.misc.commonwealthbank.weathersimulator.service.WeatherService;
 
-public class MultiThreadedSimEngine extends AbstractWeatherEngine {
-	public MultiThreadedSimEngine(WeatherService service, Emitter emitter) {
+public class MultiThreadedTimeBasedSimulatorEngine extends AbstractWeatherEngine {
+	private Integer timeInSeconds;
+
+	public MultiThreadedTimeBasedSimulatorEngine(WeatherService service, Emitter emitter, Integer timeInSeconds) {
 		super(service, emitter);
+		this.timeInSeconds = timeInSeconds;
 	}
 
 	@Override
 	public void perform() {
+		LocalTime endtime = LocalTime.now().plusSeconds(timeInSeconds);
 		try {
 			Thread t = new Thread(() -> {
-				while (true) {
+				while (endtime.isAfter(LocalTime.now())) {
 					Position position = new Position("-33.86", "151.21", "39");
 					Calendar calendar = Calendar.getInstance();
 					emit(position, calendar);
