@@ -30,6 +30,17 @@ Solution:
 The main catch in the problem is the term emit. The Simulator is suppose to emit the weather samples into probably another system via a Subject to an Observer (refer Observer Pattern https://technicalyorker.wordpress.com/2015/07/14/behavioral-patterns/) or sending/publishing message into a Messaging Destination such as a Queue or Topic.
 Thus the System generates data and emits it to its destination. The Coordination is done by a WeatherEngine. Engine is associated with a Trigger which is probably a scheduler or a timer which indicates to the Engine to sample data. Once the Engine gets its data it emits it to an Emitter. Please find the class diagram here:
 
+FAQ:
+main class to run the project:
+com.technicalyorker.misc.commonwealthbank.weathersimulator.WeatherSimulatorApplication
+
+Building the project:
+mvn -e clean install
+Running the application:
+mvn -e exec:java
+Note: Please Wait for around 10s since the first simulator output to complete alternately one could change the timer to lesser time if desired.
+
+Note:
 I haven't published all the testcases and decided to keep it to myself! :) 
 
 
