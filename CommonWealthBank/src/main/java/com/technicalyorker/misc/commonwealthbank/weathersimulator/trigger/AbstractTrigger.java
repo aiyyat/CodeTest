@@ -3,7 +3,7 @@ package com.technicalyorker.misc.commonwealthbank.weathersimulator.trigger;
 import com.technicalyorker.misc.commonwealthbank.weathersimulator.engine.WeatherEngine;
 
 /**
- * An Abstract Trigger provides the degault implementation of notifyEngine
+ * An Abstract Trigger provides the default implementation of notifyEngine
  * operation that invokes the engine to perform data sampling and emission.
  * 
  * @author achuth

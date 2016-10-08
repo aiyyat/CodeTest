@@ -1,14 +1,14 @@
 package com.technicalyorker.misc.commonwealthbank.weathersimulator;
 
-import org.junit.Test;
+import static com.technicalyorker.misc.commonwealthbank.weathersimulator.util.WeatherSimulatorUtil.anyCountry;
 
-import com.technicalyorker.misc.commonwealthbank.weathersimulator.util.WeatherSimulatorUtil;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
 public class UtilityTester {
 	@Test
 	public void testCountry() {
-		TestCase.assertFalse(WeatherSimulatorUtil.anyCountry().matches(".*\\d+.*"));
+		TestCase.assertFalse(anyCountry().matches(".*\\d+.*"));
 	}
 }
