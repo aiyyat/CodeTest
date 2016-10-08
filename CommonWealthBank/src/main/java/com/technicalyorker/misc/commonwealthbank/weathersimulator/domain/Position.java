@@ -1,5 +1,13 @@
 package com.technicalyorker.misc.commonwealthbank.weathersimulator.domain;
 
+/**
+ * A Position class is immuatable and encapsulates the attributes of a position
+ * entity. The position class most of the time would be used to query data from
+ * the Weather Service and hence the input parameter.
+ * 
+ * @author achuth
+ *
+ */
 public class Position {
 	private String latitude;
 	private String longitude;
@@ -62,6 +70,6 @@ public class Position {
 
 	@Override
 	public String toString() {
-		return "Position [latitude=" + latitude + ", longitude=" + longitude + ", altitude=" + altitude + "]";
+		return latitude + "," + longitude + "," + altitude;
 	}
 }

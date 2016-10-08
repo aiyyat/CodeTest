@@ -1,8 +1,13 @@
 package com.technicalyorker.misc.commonwealthbank.weathersimulator.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import com.technicalyorker.misc.commonwealthbank.weathersimulator.constants.WeatherSimulatorConstants;
+
 /**
+ * This domain model class encapsulates the attributes of a Weather entity.
+ * 
  * @author achuth
  *
  */
@@ -13,7 +18,8 @@ public class Weather {
 	private Condition condition;
 	private String temperature;
 	private String pressure;
-	private Integer humidity;
+	private String humidity;
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 	private Weather() {
 	}
@@ -26,8 +32,8 @@ public class Weather {
 		return position;
 	}
 
-	public Calendar getLocalTime() {
-		return localTime;
+	public String getLocalTime() {
+		return sdf.format(localTime.getTime()) + "Z";
 	}
 
 	public Condition getCondition() {
@@ -42,7 +48,7 @@ public class Weather {
 		return pressure;
 	}
 
-	public Integer getHumidity() {
+	public String getHumidity() {
 		return humidity;
 	}
 
@@ -70,7 +76,7 @@ public class Weather {
 		this.pressure = pressure;
 	}
 
-	private void setHumidity(Integer humidity) {
+	private void setHumidity(String humidity) {
 		this.humidity = humidity;
 	}
 
@@ -111,9 +117,14 @@ public class Weather {
 
 	@Override
 	public String toString() {
-		return "Weather [location=" + location + ", position=" + position + ", localTime=" + localTime + ", condition="
-				+ condition + ", temperature=" + temperature + ", pressure=" + pressure + ", humidity=" + humidity
-				+ "]";
+		StringBuilder sb = new StringBuilder("");
+		sb.append(location != null ? location : "").append(WeatherSimulatorConstants.SEPERATOR).append(position)
+				.append(WeatherSimulatorConstants.SEPERATOR).append(getLocalTime())
+				.append(WeatherSimulatorConstants.SEPERATOR).append(condition.name())
+				.append(WeatherSimulatorConstants.SEPERATOR).append(temperature)
+				.append(WeatherSimulatorConstants.SEPERATOR).append(pressure)
+				.append(WeatherSimulatorConstants.SEPERATOR).append(humidity);
+		return sb.toString();
 	}
 
 	public class WeatherBuilder {
@@ -144,7 +155,7 @@ public class Weather {
 			return this;
 		}
 
-		public WeatherBuilder humidity(Integer humidity) {
+		public WeatherBuilder humidity(String humidity) {
 			weather.setHumidity(humidity);
 			return this;
 		}
