@@ -27,20 +27,31 @@ Analytics & Information
 Commonwealth Bank
 
 Solution: 
-The main catch in the problem is the term emit. The Simulator is suppose to emit the weather samples into probably another system via a Subject to an Observer (refer Observer Pattern https://technicalyorker.wordpress.com/2015/07/14/behavioral-patterns/) or sending/publishing message into a Messaging Destination such as a Queue or Topic.
-Thus the System generates data and emits it to its destination. The Coordination is done by a WeatherEngine. Engine is associated with a Trigger which is probably a scheduler or a timer which indicates to the Engine to sample data. Once the Engine gets its data it emits it to an Emitter. Please find the class diagram here:
+The main catch in the problem is the term 'emit'. The Simulator is suppose to emit the weather samples into probably another system via a Subject to an Observer (refer Observer Pattern https://technicalyorker.wordpress.com/2015/07/14/behavioral-patterns/) or sending/publishing message into a Messaging Destination such as a Queue or Topic.
+Thus the System generates data and pushes it to its destination. 
+
+The Co-ordination between components is done by a WeatherEngine. Engine is always associated with a Trigger which is probably a scheduler or a timer of any kind which indicates to the Engine to sample data. In this example a SimpleTrigger and a Trigger that uses a separate thread to fire is being used to demo the usuage. Once the Engine gets its data, it emits it to an Emitter. Data can be got from literally any source. It is enough to provide an implementation of the WeatherService. The implementation could be any thing from reading from a database or even from a Service End Point. Emitter in this case has been kept simple. A Logger Emitter simply writes to the Console Print Stream. In real time implementation this could be writing it in the form of a Message or to the database of the interfacing system.
+Entities involved here are a Weather class that produces the output in the format expected by the problem statement. However for complex transformations, a separate component exclusive for transformation could be used. Weather has an inbuilt builder to construct it, it being a very complex object.
+I would have replaced all the boiler plate code with something like lombok which would make the code look cleaner had it not been a coding test.
+A Position object is immutable in nature since it is mostly going to used to query the data by services along with an instance of localtime. Condition is an enum used to represent various weather conditions such as Rain,Sunny & Snow. 
+
+Please find the class diagram here:
+https://raw.githubusercontent.com/technicalyorker/TCS/master/CommonWealthBank/misc/Classdiagram.gif
 
 FAQ:
+
 main class to run the project:
 com.technicalyorker.misc.commonwealthbank.weathersimulator.WeatherSimulatorApplication
 
 Building the project:
 mvn -e clean install
+
 Running the application:
 mvn -e exec:java
+
 Note: Please Wait for around 10s since the first simulator output to complete alternately one could change the timer to lesser time if desired.
 
 Note:
-I haven't published all the testcases and decided to keep it to myself! :) 
+I haven't published all the testcases.  
 
 
