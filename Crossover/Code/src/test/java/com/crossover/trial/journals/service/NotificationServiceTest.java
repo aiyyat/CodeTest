@@ -33,7 +33,6 @@ import junit.framework.TestCase;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class NotificationServiceTest {
 	@Autowired
 	NotificationService notificationService;
@@ -81,6 +80,8 @@ public class NotificationServiceTest {
 
 	@After
 	public void tearDown() {
+		Subscription s2 = new Subscription();
+		s2.setId(s.getId());
 		sRepo.delete(s);
 		jRepo.delete(j);
 		pRepo.delete(p);
