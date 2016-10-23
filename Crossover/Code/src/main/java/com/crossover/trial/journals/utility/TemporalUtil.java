@@ -27,7 +27,6 @@ public class TemporalUtil {
 		try {
 			return s.parse(str);
 		} catch (ParseException e) {
-			e.printStackTrace();
 			throw new IllegalDateFormatException(e.getMessage());
 		}
 	}

@@ -1,9 +1,6 @@
 package com.crossover.trial.journals.repository;
 
-import static com.crossover.trial.journals.model.NotificationStatus.BEGIN_POLLING;
 import static com.crossover.trial.journals.model.NotificationStatus.SENT;
-
-import java.util.Date;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,35 +10,32 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.crossover.trial.journals.Application;
-import com.crossover.trial.journals.model.Notification;
+import com.crossover.trial.journals.model.Category;
 
 import junit.framework.TestCase;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-public class NotificationRepositoryTest {
+public class CategoryRepositoryTest {
 
 	@Autowired
-	NotificationRepository repository;
+	CategoryRepository repository;
 
 	@Test
 	public void testCRUD() throws Exception {
-		Notification n = new Notification();
-		n.setLastTrigger(new Date());
-		n.setNotificationSent(BEGIN_POLLING);
-		Long id = n.getId();
-		TestCase.assertNull(id);
+		Category n = new Category();
+		n.setName("Test Category");
 		repository.save(n);
 
-		n.setNotificationSent(SENT);
+		n.setName("Test 1 Category");
 		repository.save(n);
-		TestCase.assertEquals(SENT, repository.findOne(n.getId()).getNotificationStatus());
+		TestCase.assertEquals("Test 1 Category", repository.findOne(n.getId()).getName());
 
 		TestCase.assertNotNull(n.getId());
-		Notification n2 = new Notification();
-		n2.setId(n.getId());
-		repository.delete(n2);
+		Category c1 = new Category();
+		c1.setId(n.getId());
+		repository.delete(c1);
 		TestCase.assertNull(repository.findOne(n.getId()));
 	}
 }

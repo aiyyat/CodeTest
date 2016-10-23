@@ -4,7 +4,7 @@ public class ApplicationConstants {
 	// In reality it will be about 30*60*1000
 	public static final long POLLING_INTERVAL_IN_SECONDS = 5 * 1000L;
 	// In reality it will be 24*60
-	public static final long TRIGGER_INTERVAL_IN_SECONDS = 60;
+	public static final long TRIGGER_INTERVAL_IN_SECONDS = 120;
 	public static final String SCHUDLED_NEW_JOURNAL_TITLE = "\n\n\n%d) Name: %s\nBy: %s\nOn: %s\nCategory: %s";
 	public static final String SCHUDLED_EMAIL_BODY_CONTENT = "Dear %s,\n\n\n  %s\n%s \n\n\n Regards, \nTeam Medical Journal!";
 	public static final String SCHUDLED_MESSAGE_COMMON = "Journels Added Since %s";

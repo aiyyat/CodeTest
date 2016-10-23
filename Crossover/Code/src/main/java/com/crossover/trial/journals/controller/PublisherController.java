@@ -1,14 +1,9 @@
 package com.crossover.trial.journals.controller;
 
-import static com.crossover.trial.journals.constants.ApplicationConstants.SUBSCRIBED_EMAIL_NOTIFICATION_BODY;
-import static com.crossover.trial.journals.constants.ApplicationConstants.SUBSCRIBED_EMAIL_NOTIFICATION_SUBJECT;
-import static java.lang.String.format;
-
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.security.Principal;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,14 +22,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.crossover.trial.journals.Application;
-import com.crossover.trial.journals.constants.ApplicationConstants;
-import com.crossover.trial.journals.model.Category;
 import com.crossover.trial.journals.model.Journal;
-import com.crossover.trial.journals.model.MailMessage;
 import com.crossover.trial.journals.model.Publisher;
-import com.crossover.trial.journals.model.Subscription;
 import com.crossover.trial.journals.repository.PublisherRepository;
-import com.crossover.trial.journals.repository.SubscriptionRepository;
 import com.crossover.trial.journals.service.CurrentUser;
 import com.crossover.trial.journals.service.JournalService;
 import com.crossover.trial.journals.service.NotificationService;
