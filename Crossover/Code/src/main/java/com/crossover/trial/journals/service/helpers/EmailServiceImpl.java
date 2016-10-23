@@ -12,7 +12,7 @@ public class EmailServiceImpl implements EmailService {
 	@Autowired
 	private JavaMailSender javaMailService;
 
-	public void sendText(MailMessage message) {
+	public void sendMessage(MailMessage message) {
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setTo(message.getTo());
 		mailMessage.setSubject(message.getSubject());

@@ -4,11 +4,10 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.crossover.trial.journals.model.Journal;
-import com.crossover.trial.journals.service.JournalService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,9 +23,18 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.crossover.trial.journals.Application;
+import com.crossover.trial.journals.builders.MailMessage;
+import com.crossover.trial.journals.model.Category;
+import com.crossover.trial.journals.model.Journal;
 import com.crossover.trial.journals.model.Publisher;
+import com.crossover.trial.journals.model.Subscription;
 import com.crossover.trial.journals.repository.PublisherRepository;
+import com.crossover.trial.journals.repository.SubscriptionRepository;
 import com.crossover.trial.journals.service.CurrentUser;
+import com.crossover.trial.journals.service.JournalService;
+import com.crossover.trial.journals.service.helpers.NotificationService;
+
+import ch.qos.logback.classic.net.SyslogAppender;
 
 @Controller
 public class PublisherController {
@@ -37,7 +45,13 @@ public class PublisherController {
 	private PublisherRepository publisherRepository;
 
 	@Autowired
+	private SubscriptionRepository subscriptionRepository;
+
+	@Autowired
 	private JournalService journalService;
+
+	@Autowired
+	private NotificationService notificationService;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/publisher/publish")
 	public String provideUploadInfo(Model model) {
@@ -46,8 +60,9 @@ public class PublisherController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "/publisher/publish")
 	@PreAuthorize("hasRole('PUBLISHER')")
-	public String handleFileUpload(@RequestParam("name") String name, @RequestParam("category")Long categoryId, @RequestParam("file") MultipartFile file,
-			RedirectAttributes redirectAttributes, @AuthenticationPrincipal Principal principal) {
+	public String handleFileUpload(@RequestParam("name") String name, @RequestParam("category") Long categoryId,
+			@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes,
+			@AuthenticationPrincipal Principal principal) {
 
 		CurrentUser activeUser = (CurrentUser) ((Authentication) principal).getPrincipal();
 		Optional<Publisher> publisher = publisherRepository.findByUser(activeUser.getUser());
@@ -66,8 +81,20 @@ public class PublisherController {
 				journal.setUuid(uuid);
 				journal.setName(name);
 				journalService.publish(publisher.get(), journal, categoryId);
+				// ~Achuth: Newly Added code
+				Category category = new Category();
+				category.setId(categoryId);
+				List<Subscription> subscriptions = subscriptionRepository.findByCategory(category);
+				subscriptions.stream().forEach(s -> {
+					String body = String.format("A New Journel was added: \nName:%s\nBy:%s\nOn:%s\nCategory:%s", name,
+							activeUser.getUsername(), journal.getPublishDate(), s.getCategory().getName());
+					notificationService.emailNotification(MailMessage.builder().to(s.getUser().getEmailId())
+							.subject("Medical Jounel: New Journel Added!! " + name).body(body).build());
+				});
+				// ~Achuth: End
 				return "redirect:/publisher/browse";
 			} catch (Exception e) {
+				e.printStackTrace();
 				redirectAttributes.addFlashAttribute("message",
 						"You failed to publish " + name + " => " + e.getMessage());
 			}

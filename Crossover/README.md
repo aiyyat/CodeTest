@@ -70,10 +70,10 @@ Design Principle:
 Few Design Principles are being violated:
 
 Program to an Interface not to an Implementation: 
-It is typically better to write code targetting an interface (contract) rather than writing code otherwise. Technology is ever changing, spring could be gone someday or if we decide to move to something like EJB (JEE Compliant), only thing we might need to do is to write a new implmentation to our interface contracts.     
+It is typically better to write code targetting an interface (contract) rather than writing code otherwise. Technology is ever changing, spring could be gone someday or if we decide to move to something like EJB (JEE Compliant), only thing we might need to do is to write a new implmentation to our interface contracts.
 Single responsibility principle(SRP):
-Controller has more than one reponsibility.(already mentioned)   
-Common Closure Principle:             
+Controller has more than one reponsibility.(already mentioned)
+Common Closure Principle:
 e.g. ServiceException should be in the exception package. 
 
 see https://technicalyorker.wordpress.com/2015/04/27/common-software-design-principles/

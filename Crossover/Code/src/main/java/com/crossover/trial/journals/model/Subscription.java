@@ -22,7 +22,7 @@ public class Subscription {
 	@Column(nullable = false)
 	private Date date;
 
-	@ManyToOne(optional= false)
+	@ManyToOne(optional = false)
 	private Category category;
 
 	@PrePersist

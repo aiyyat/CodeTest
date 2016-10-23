@@ -24,6 +24,6 @@ public class EmailServiceTest {
 
 	@Test
 	public void sendEmail() throws Exception {
-		emailService.sendText("Hello World!");
+		emailService.sendMessage("Hello World!");
 	}
 }

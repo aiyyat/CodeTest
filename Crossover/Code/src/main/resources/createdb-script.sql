@@ -5,8 +5,12 @@ CREATE TABLE user
     enabled BIT(1) NOT NULL,
     login_name VARCHAR(255) NOT NULL,
     pwd VARCHAR(255) NOT NULL,
-    role VARCHAR(255) NOT NULL
+    role VARCHAR(255) NOT NULL,
+    email_id VARCHAR(255) NOT NULL
 );
+ALTER TABLE `journals`.`user` 
+ADD UNIQUE INDEX `email_id_UNIQUE` (`email_id` ASC);
+
 CREATE TABLE item
 (
     id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,

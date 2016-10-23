@@ -30,7 +30,12 @@ public class User {
 
 	@Column(nullable = false)
 	private String pwd;
-
+	
+	// ~Achuth: Added New
+	@Column(name = "email_id", nullable = false)
+	private String emailId;
+	// ~Achuth: End
+	
 	@Column(nullable = false)
 	private Boolean enabled;
 
@@ -46,6 +51,16 @@ public class User {
 		return loginName;
 	}
 
+	// ~Achuth: Added New
+	public String getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+
+	// ~Achuth: End
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
 	}

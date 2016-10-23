@@ -1,12 +1,13 @@
 package com.crossover.trial.journals.builders;
 
-import java.io.InputStream;
-
 public class MailMessage {
 	private String to;
 	private String body;
 	private String subject;
 	private byte[] attachment;
+
+	private MailMessage() {
+	}
 
 	public String getTo() {
 		return to;
@@ -40,29 +41,29 @@ public class MailMessage {
 		this.attachment = attachment;
 	}
 
-	public MailMessageBuilder builder() {
+	public static MailMessageBuilder builder() {
 		return new MailMessageBuilder();
 	}
 
-	class MailMessageBuilder {
-		MailMessage message;
+	public static class MailMessageBuilder {
+		private MailMessage message = new MailMessage();
 
-		MailMessageBuilder body(String body) {
+		public MailMessageBuilder body(String body) {
 			message.setBody(body);
 			return this;
 		}
 
-		MailMessageBuilder subject(String subject) {
+		public MailMessageBuilder subject(String subject) {
 			message.setSubject(subject);
 			return this;
 		}
 
-		MailMessageBuilder to(String to) {
+		public MailMessageBuilder to(String to) {
 			message.setTo(to);
 			return this;
 		}
 
-		MailMessageBuilder attachment(byte[] attachment) {
+		public MailMessageBuilder attachment(byte[] attachment) {
 			message.setAttachment(attachment);
 			return this;
 		}
