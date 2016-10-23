@@ -19,6 +19,7 @@ import static com.crossover.trial.journals.utility.TemporalUtil.toLocalDateTime;
 import static java.lang.String.format;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -60,6 +61,11 @@ public class NotificationServiceImpl implements NotificationService {
 	@Override
 	@Scheduled(fixedRate = POLLING_INTERVAL_IN_SECONDS)
 	public void scheduledNotification() {
+		notify(poll());
+	}
+
+	public List<MailMessage> poll() {
+		List<MailMessage> messages = new ArrayList<>();
 		final Notification prevNote = notificationRepository.findTopByOrderByLastTriggerDesc();
 		final Notification newNote = new Notification();
 		final LocalDateTime now = LocalDateTime.now();
@@ -69,7 +75,7 @@ public class NotificationServiceImpl implements NotificationService {
 		try {
 			if (prevNote != null) {
 				if (now.isBefore(toLocalDateTime(prevNote.getLastTrigger()).plusSeconds(TRIGGER_INTERVAL_IN_SECONDS))) {
-					return;
+					return null;
 				}
 				// Needed a mutable version of Integer here to mark final
 				final AtomicInteger journalCount = new AtomicInteger(0);
@@ -81,7 +87,7 @@ public class NotificationServiceImpl implements NotificationService {
 				if (0 < journalCount.get()) {
 					userRepository.findAll().forEach(k -> {
 						String msg = format(SCHUDLED_MESSAGE_COMMON, format(prevNote.getLastTrigger()));
-						emailNotification(MailMessage.builder().to(k.getEmailId()).subject(msg + "!")
+						messages.add(MailMessage.builder().to(k.getEmailId()).subject(msg + "!")
 								.body(format(SCHUDLED_EMAIL_BODY_CONTENT, k.getLoginName(), msg, s.toString()))
 								.build());
 						log.info("Scheduled Email Triggered to: " + k.getLoginName() + " at " + now);
@@ -102,21 +108,30 @@ public class NotificationServiceImpl implements NotificationService {
 		// be flooded with emails, every time the notification table undergoes
 		// housekeeping
 		notificationRepository.save(newNote);
+		return messages;
 	}
 
 	@Override
 	public void notifyNewJournal(Journal journal) {
+		notify(fetchMailMessagesForSubscribers(journal));
+	}
+
+	public List<MailMessage> fetchMailMessagesForSubscribers(Journal journal) {
+		List<MailMessage> messages = new ArrayList<>();
 		List<Subscription> subscriptions = subscriptionRepository.findByCategory(journal.getCategory());
 		subscriptions.stream().forEach(s -> {
 			String body = format(SUBSCRIBED_EMAIL_NOTIFICATION_BODY, s.getUser().getLoginName(), journal.getName(),
 					journal.getPublisher().getName(), format(journal.getPublishDate()), s.getCategory().getName());
-			emailNotification(MailMessage.builder().to(s.getUser().getEmailId())
+			messages.add(MailMessage.builder().to(s.getUser().getEmailId())
 					.subject(format(SUBSCRIBED_EMAIL_NOTIFICATION_SUBJECT, journal.getName())).body(body).build());
 		});
+		return messages;
 	}
 
 	@Override
-	public void emailNotification(MailMessage message) {
-		emailService.sendMessage(message);
+	public void notify(List<MailMessage> messages) {
+		if (null != messages) {
+			messages.forEach(m -> emailService.sendMessage(m));
+		}
 	}
 }

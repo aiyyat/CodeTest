@@ -30,12 +30,12 @@ public class User {
 
 	@Column(nullable = false)
 	private String pwd;
-	
+
 	// ~Achuth: Added New
 	@Column(name = "email_id", nullable = false)
 	private String emailId;
 	// ~Achuth: End
-	
+
 	@Column(nullable = false)
 	private Boolean enabled;
 
