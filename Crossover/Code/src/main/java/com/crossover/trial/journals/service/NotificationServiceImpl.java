@@ -9,11 +9,13 @@ import static com.crossover.trial.journals.constants.ApplicationConstants.SCHUDL
 import static com.crossover.trial.journals.constants.ApplicationConstants.SUBSCRIBED_EMAIL_NOTIFICATION_BODY;
 import static com.crossover.trial.journals.constants.ApplicationConstants.SUBSCRIBED_EMAIL_NOTIFICATION_SUBJECT;
 import static com.crossover.trial.journals.constants.ApplicationConstants.TRIGGER_INTERVAL_IN_SECONDS;
+import static com.crossover.trial.journals.model.EmailStatus.BEGIN_POLLING;
 import static com.crossover.trial.journals.model.EmailStatus.ERROR;
+import static com.crossover.trial.journals.model.EmailStatus.NO_NEW_JOURNALS;
 import static com.crossover.trial.journals.model.EmailStatus.SENT;
 import static com.crossover.trial.journals.utility.TemporalUtil.format;
 import static com.crossover.trial.journals.utility.TemporalUtil.toDate;
-import static java.lang.Math.min;
+import static com.crossover.trial.journals.utility.TemporalUtil.toLocalDateTime;
 import static java.lang.String.format;
 
 import java.time.LocalDateTime;
@@ -25,8 +27,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import com.crossover.trial.journals.constants.ApplicationConstants;
-import com.crossover.trial.journals.model.EmailStatus;
 import com.crossover.trial.journals.model.Journal;
 import com.crossover.trial.journals.model.MailMessage;
 import com.crossover.trial.journals.model.Notification;
@@ -36,7 +36,6 @@ import com.crossover.trial.journals.repository.NotificationRepository;
 import com.crossover.trial.journals.repository.SubscriptionRepository;
 import com.crossover.trial.journals.repository.UserRepository;
 import com.crossover.trial.journals.service.helpers.EmailService;
-import com.crossover.trial.journals.utility.TemporalUtil;
 
 /**
  * Handles Scheduled User Notification
@@ -65,12 +64,11 @@ public class NotificationServiceImpl implements NotificationService {
 		final Notification newNote = new Notification();
 		final LocalDateTime now = LocalDateTime.now();
 		newNote.setLastTrigger(toDate(now));
-		newNote.setEmailSent(EmailStatus.BEGIN_POLLING);
+		newNote.setEmailSent(BEGIN_POLLING);
 		final StringBuffer s = new StringBuffer(FIRST_TIME_POLL_MESSAGE);
 		try {
 			if (prevNote != null) {
-				if (now.isBefore(TemporalUtil.toLocalDateTime(prevNote.getLastTrigger())
-						.plusSeconds(TRIGGER_INTERVAL_IN_SECONDS))) {
+				if (now.isBefore(toLocalDateTime(prevNote.getLastTrigger()).plusSeconds(TRIGGER_INTERVAL_IN_SECONDS))) {
 					return;
 				}
 				// Needed a mutable version of Integer here to mark final
@@ -88,9 +86,10 @@ public class NotificationServiceImpl implements NotificationService {
 								.build());
 						log.info("Scheduled Email Triggered to: " + k.getLoginName() + " at " + now);
 					});
-					s.append(SENT);
+					newNote.setEmailSent(SENT);
 				} else {
 					s.append(NO_JOURNALS_ADDED);
+					newNote.setEmailSent(NO_NEW_JOURNALS);
 				}
 			}
 		} catch (Exception e) {

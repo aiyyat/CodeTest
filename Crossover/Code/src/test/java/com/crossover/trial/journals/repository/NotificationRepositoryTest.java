@@ -1,6 +1,6 @@
 package com.crossover.trial.journals.repository;
 
-import static com.crossover.trial.journals.model.EmailStatus.NOT_SENT;
+import static com.crossover.trial.journals.model.EmailStatus.NO_NEW_JOURNALS;
 import static com.crossover.trial.journals.utility.TemporalUtil.format;
 import static java.util.Calendar.DAY_OF_MONTH;
 
@@ -34,12 +34,12 @@ public class NotificationRepositoryTest {
 
 		Notification ns = new Notification();
 		ns.setLastTrigger(later.getTime());
-		ns.setEmailSent(NOT_SENT);
+		ns.setEmailSent(NO_NEW_JOURNALS);
 		n.save(ns);
 
 		ns = new Notification();
 		ns.setLastTrigger(earlier.getTime());
-		ns.setEmailSent(NOT_SENT);
+		ns.setEmailSent(NO_NEW_JOURNALS);
 		n.save(ns);
 
 		TestCase.assertEquals(format(later.getTime()), format(n.findTopByOrderByLastTriggerDesc().getLastTrigger()));
