@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.crossover.trial.journals.exception.ServiceException;
 import com.crossover.trial.journals.model.Category;
 import com.crossover.trial.journals.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;

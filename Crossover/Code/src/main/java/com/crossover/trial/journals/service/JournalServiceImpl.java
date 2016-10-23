@@ -7,20 +7,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import com.crossover.trial.journals.controller.PublisherController;
-import com.crossover.trial.journals.model.Category;
-import com.crossover.trial.journals.model.Journal;
-import com.crossover.trial.journals.model.Publisher;
-import com.crossover.trial.journals.model.User;
-import com.crossover.trial.journals.repository.CategoryRepository;
-import com.crossover.trial.journals.repository.UserRepository;
-import com.crossover.trial.journals.model.Subscription;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.crossover.trial.journals.controller.PublisherController;
+import com.crossover.trial.journals.exception.ServiceException;
+import com.crossover.trial.journals.model.Category;
+import com.crossover.trial.journals.model.Journal;
+import com.crossover.trial.journals.model.Publisher;
+import com.crossover.trial.journals.model.Subscription;
+import com.crossover.trial.journals.model.User;
+import com.crossover.trial.journals.repository.CategoryRepository;
 import com.crossover.trial.journals.repository.JournalRepository;
+import com.crossover.trial.journals.repository.UserRepository;
 
 @Service
 public class JournalServiceImpl implements JournalService {
@@ -58,7 +59,7 @@ public class JournalServiceImpl implements JournalService {
 	@Override
 	public Journal publish(Publisher publisher, Journal journal, Long categoryId) throws ServiceException {
 		Category category = categoryRepository.findOne(categoryId);
-		if(category == null) {
+		if (category == null) {
 			throw new ServiceException("Category not found");
 		}
 		journal.setPublisher(publisher);
