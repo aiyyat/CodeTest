@@ -9,10 +9,10 @@ import static com.crossover.trial.journals.constants.ApplicationConstants.SCHUDL
 import static com.crossover.trial.journals.constants.ApplicationConstants.SUBSCRIBED_EMAIL_NOTIFICATION_BODY;
 import static com.crossover.trial.journals.constants.ApplicationConstants.SUBSCRIBED_EMAIL_NOTIFICATION_SUBJECT;
 import static com.crossover.trial.journals.constants.ApplicationConstants.TRIGGER_INTERVAL_IN_SECONDS;
-import static com.crossover.trial.journals.model.EmailStatus.BEGIN_POLLING;
-import static com.crossover.trial.journals.model.EmailStatus.ERROR;
-import static com.crossover.trial.journals.model.EmailStatus.NO_NEW_JOURNALS;
-import static com.crossover.trial.journals.model.EmailStatus.SENT;
+import static com.crossover.trial.journals.model.NotificationStatus.BEGIN_POLLING;
+import static com.crossover.trial.journals.model.NotificationStatus.ERROR;
+import static com.crossover.trial.journals.model.NotificationStatus.NO_NEW_JOURNALS;
+import static com.crossover.trial.journals.model.NotificationStatus.SENT;
 import static com.crossover.trial.journals.utility.TemporalUtil.format;
 import static com.crossover.trial.journals.utility.TemporalUtil.toDate;
 import static com.crossover.trial.journals.utility.TemporalUtil.toLocalDateTime;
@@ -64,7 +64,7 @@ public class NotificationServiceImpl implements NotificationService {
 		final Notification newNote = new Notification();
 		final LocalDateTime now = LocalDateTime.now();
 		newNote.setLastTrigger(toDate(now));
-		newNote.setEmailSent(BEGIN_POLLING);
+		newNote.setNotificationSent(BEGIN_POLLING);
 		final StringBuffer s = new StringBuffer(FIRST_TIME_POLL_MESSAGE);
 		try {
 			if (prevNote != null) {
@@ -86,16 +86,16 @@ public class NotificationServiceImpl implements NotificationService {
 								.build());
 						log.info("Scheduled Email Triggered to: " + k.getLoginName() + " at " + now);
 					});
-					newNote.setEmailSent(SENT);
+					newNote.setNotificationSent(SENT);
 				} else {
 					s.append(NO_JOURNALS_ADDED);
-					newNote.setEmailSent(NO_NEW_JOURNALS);
+					newNote.setNotificationSent(NO_NEW_JOURNALS);
 				}
 			}
 		} catch (Exception e) {
 			s.setLength(0);
 			s.append(e.getMessage());
-			newNote.setEmailSent(ERROR);
+			newNote.setNotificationSent(ERROR);
 			log.error(e, e);
 		}
 		// Do not Send Email the first time around else users mailbox will

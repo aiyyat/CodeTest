@@ -25,7 +25,7 @@ public class Notification {
 	private Date lastTrigger;
 	@Column(name = "email_status")
 	@Enumerated(EnumType.STRING)
-	private EmailStatus emailSent;
+	private NotificationStatus notificationStatus;
 
 	public Long getId() {
 		return id;
@@ -43,11 +43,11 @@ public class Notification {
 		this.lastTrigger = lastTrigger;
 	}
 
-	public EmailStatus getEmailSent() {
-		return emailSent;
+	public NotificationStatus getNotificationStatus() {
+		return notificationStatus;
 	}
 
-	public void setEmailSent(EmailStatus emailSent) {
-		this.emailSent = emailSent;
+	public void setNotificationSent(NotificationStatus notificationStatus) {
+		this.notificationStatus = notificationStatus;
 	}
 }
