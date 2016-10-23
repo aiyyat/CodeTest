@@ -31,11 +31,6 @@ public class UserServiceTest {
 		TestCase.assertEquals(u.getId(), userService.getUserByLoginName(u.getLoginName()).get().getId());
 	}
 
-	@Test(expected = NoSuchElementException.class)
-	public void testUserByNonExistantLoginName() {
-		userService.getUserByLoginName("non existant name");
-	}
-
 	@Test
 	public void testSubscribe() {
 		final AtomicBoolean b = new AtomicBoolean(false);

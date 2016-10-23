@@ -51,7 +51,7 @@ public class CategoryRestServiceTest {
 				.andExpect(jsonPath("$[2].id", is(3)))
 				.andExpect(jsonPath("$[2].name", is("endocrinology")))
 				.andExpect(jsonPath("$[3].id", is(4)))
-				.andExpect(jsonPath("$[3].name", is("microbiology'")))
+				.andExpect(jsonPath("$[3].name", is("microbiology")))
 				.andExpect(jsonPath("$[4].id", is(5)))
 				.andExpect(jsonPath("$[4].name", is("neurology")));
 	}
