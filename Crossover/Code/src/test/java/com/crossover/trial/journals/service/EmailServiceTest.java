@@ -8,8 +8,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.crossover.trial.journals.Application;
+import com.crossover.trial.journals.exception.IllegalMailMessageException;
 import com.crossover.trial.journals.model.MailMessage;
-import com.crossover.trial.journals.service.exception.IllegalMailMessageException;
 import com.crossover.trial.journals.service.helpers.EmailService;
 
 import junit.framework.TestCase;

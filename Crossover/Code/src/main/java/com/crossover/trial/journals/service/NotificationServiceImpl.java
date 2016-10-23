@@ -37,7 +37,6 @@ import com.crossover.trial.journals.repository.NotificationRepository;
 import com.crossover.trial.journals.repository.SubscriptionRepository;
 import com.crossover.trial.journals.repository.UserRepository;
 import com.crossover.trial.journals.service.helpers.EmailService;
-import com.crossover.trial.journals.utility.TemporalUtil;
 
 /**
  * Handles Scheduled User Notification
@@ -59,12 +58,22 @@ public class NotificationServiceImpl implements NotificationService {
 	@Autowired
 	private SubscriptionRepository subscriptionRepository;
 
+	/**
+	 * This operation will call the poller in an interval defined by
+	 * TRIGGER_INTERVAL_IN_SECONDS
+	 */
 	@Override
 	@Scheduled(fixedRate = POLLING_INTERVAL_IN_SECONDS)
 	public void scheduledNotification() {
 		notify(poll(TRIGGER_INTERVAL_IN_SECONDS, notificationRepository.findTopByOrderByLastTriggerDesc()));
 	}
 
+	/**
+	 * in this operation the parameters are timeInSeconds since the last trigger
+	 * and Previous Notification. These parameters help us unit test the
+	 * operations easily. We are seperating out business logic from scheduling
+	 * logic.
+	 */
 	@Override
 	public List<MailMessage> poll(Long timeInSeconds, final Notification prevNote) {
 		List<MailMessage> messages = new ArrayList<>();
@@ -112,11 +121,18 @@ public class NotificationServiceImpl implements NotificationService {
 		return messages;
 	}
 
+	/**
+	 * Notify all the MailMessages returned by fetchMailMessagesforSubscribers
+	 * operation.
+	 */
 	@Override
 	public void notifyNewJournal(Journal journal) {
 		notify(fetchMailMessagesForSubscribers(journal));
 	}
 
+	/**
+	 * Fetch all the subscribers for a new journal.
+	 */
 	@Override
 	public List<MailMessage> fetchMailMessagesForSubscribers(Journal journal) {
 		List<MailMessage> messages = new ArrayList<>();
