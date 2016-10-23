@@ -86,8 +86,10 @@ public class PublisherController {
 				category.setId(categoryId);
 				List<Subscription> subscriptions = subscriptionRepository.findByCategory(category);
 				subscriptions.stream().forEach(s -> {
-					String body = String.format("A New Journel was added: \nName:%s\nBy:%s\nOn:%s\nCategory:%s", name,
-							activeUser.getUsername(), journal.getPublishDate(), s.getCategory().getName());
+					String body = String.format(
+							"Dear %s, \n\n A New Journel was added: \nName:%s\nBy:%s\nOn:%s\nCategory:%s\n\nRegards,\nTeam Medical Journal.",
+							s.getUser().getLoginName(), name, activeUser.getUsername(), journal.getPublishDate(),
+							s.getCategory().getName());
 					notificationService.emailNotification(MailMessage.builder().to(s.getUser().getEmailId())
 							.subject("Medical Jounel: New Journel Added!! " + name).body(body).build());
 				});
