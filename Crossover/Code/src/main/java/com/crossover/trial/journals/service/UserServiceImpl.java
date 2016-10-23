@@ -30,8 +30,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Optional<User> getUserByLoginName(String loginName) {
-		System.out.println(userRepository.findByLoginName(loginName).getLoginName() + ":"
-				+ userRepository.findByLoginName(loginName).getPwd());
 		return Optional.ofNullable(userRepository.findByLoginName(loginName));
 	}
 

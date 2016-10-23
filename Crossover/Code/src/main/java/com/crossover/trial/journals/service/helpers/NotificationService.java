@@ -6,4 +6,6 @@ public interface NotificationService {
 
 	void emailNotification(MailMessage build);
 
+	void scheduledNotification();
+
 }
