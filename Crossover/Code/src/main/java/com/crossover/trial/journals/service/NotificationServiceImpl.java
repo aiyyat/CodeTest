@@ -61,12 +61,12 @@ public class NotificationServiceImpl implements NotificationService {
 	@Override
 	@Scheduled(fixedRate = POLLING_INTERVAL_IN_SECONDS)
 	public void scheduledNotification() {
-		notify(poll());
+		notify(poll(TRIGGER_INTERVAL_IN_SECONDS, notificationRepository.findTopByOrderByLastTriggerDesc()));
 	}
 
-	public List<MailMessage> poll() {
+	@Override
+	public List<MailMessage> poll(Long timeInSeconds, final Notification prevNote) {
 		List<MailMessage> messages = new ArrayList<>();
-		final Notification prevNote = notificationRepository.findTopByOrderByLastTriggerDesc();
 		final Notification newNote = new Notification();
 		final LocalDateTime now = LocalDateTime.now();
 		newNote.setLastTrigger(toDate(now));
@@ -74,7 +74,7 @@ public class NotificationServiceImpl implements NotificationService {
 		final StringBuffer s = new StringBuffer(FIRST_TIME_POLL_MESSAGE);
 		try {
 			if (prevNote != null) {
-				if (now.isBefore(toLocalDateTime(prevNote.getLastTrigger()).plusSeconds(TRIGGER_INTERVAL_IN_SECONDS))) {
+				if (now.isBefore(toLocalDateTime(prevNote.getLastTrigger()).plusSeconds(timeInSeconds))) {
 					return null;
 				}
 				// Needed a mutable version of Integer here to mark final
@@ -116,6 +116,7 @@ public class NotificationServiceImpl implements NotificationService {
 		notify(fetchMailMessagesForSubscribers(journal));
 	}
 
+	@Override
 	public List<MailMessage> fetchMailMessagesForSubscribers(Journal journal) {
 		List<MailMessage> messages = new ArrayList<>();
 		List<Subscription> subscriptions = subscriptionRepository.findByCategory(journal.getCategory());
@@ -128,8 +129,7 @@ public class NotificationServiceImpl implements NotificationService {
 		return messages;
 	}
 
-	@Override
-	public void notify(List<MailMessage> messages) {
+	private void notify(List<MailMessage> messages) {
 		if (null != messages) {
 			messages.forEach(m -> emailService.sendMessage(m));
 		}
