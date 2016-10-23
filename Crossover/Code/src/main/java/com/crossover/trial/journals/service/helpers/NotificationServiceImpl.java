@@ -1,5 +1,8 @@
 package com.crossover.trial.journals.service.helpers;
 
+import static com.crossover.trial.journals.constants.ApplicationConstants.POLLING_INTERVAL_IN_SECONDS;
+import static com.crossover.trial.journals.constants.ApplicationConstants.TRIGGER_INTERVAL_IN_SECONDS;
+
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -28,21 +31,22 @@ public class NotificationServiceImpl implements NotificationService {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Scheduled(fixedRate = 5000)
+	@Scheduled(fixedRate = POLLING_INTERVAL_IN_SECONDS)
 	@Override
 	public synchronized void scheduledNotification() {
 		Notification sb = notificationRepository.findTopByOrderByLastTriggerDesc();
 		LocalDateTime now = LocalDateTime.now();
+		final StringBuffer s = new StringBuffer("First Trigger!");
 		if (sb != null) {
-			if (now.isBefore(Util.to(sb.getLastTrigger()).plusSeconds(30))) {
+			if (now.isBefore(Util.to(sb.getLastTrigger()).plusSeconds(TRIGGER_INTERVAL_IN_SECONDS))) {
 				return;
 			}
-			StringBuffer s = new StringBuffer("");
+			s.setLength(0);
 			final AtomicInteger journalCount = new AtomicInteger(0);
 			journalRepository.findBypublishDateAfter(sb.getLastTrigger()).forEach(j -> {
-				s.append(String.format("\n\n\n%d)Name: %s\nBy: %s\nOn: %s\nCategory: %s",
-						journalCount.incrementAndGet(), j.getName(), j.getPublisher().getName(),
-						j.getCategory().getName(), j.getPublishDate(), j.getCategory().getName()));
+				s.append(String.format("\n\n\n%d) Name: %s\nBy: %s\nOn: %s\nCategory: %s",
+						journalCount.incrementAndGet(), j.getName(), j.getPublisher().getName(), j.getPublishDate(),
+						j.getCategory().getName()));
 			});
 			if (0 < journalCount.get()) {
 				userRepository.findAll().forEach(k -> {
@@ -51,12 +55,14 @@ public class NotificationServiceImpl implements NotificationService {
 							.body(String.format("Dear %s,\n\n\n  %s\n%s \n\n\n Regards, \nTeam Medical Journal!",
 									k.getLoginName(), text, s.toString()))
 							.build());
+					log.info("Scheduled Email Triggered to: " + k.getLoginName() + " at " + now);
 				});
 			}
 		}
 		// Else users mailbox will be flooded with emails everytime the
 		// notification table undergoes housekeeping
 		Notification notification = new Notification();
+		notification.setMessage(s.toString());
 		notification.setLastTrigger(new Date());
 		notificationRepository.save(notification);
 	}

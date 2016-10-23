@@ -1,4 +1,4 @@
-package com.crossover.trial.journals.rest;
+package com.crossover.trial.journals.repository;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

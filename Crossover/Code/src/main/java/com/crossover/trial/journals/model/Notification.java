@@ -21,6 +21,7 @@ public class Notification {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "last_trigger")
 	private Date lastTrigger;
+	private String message;
 
 	public Long getId() {
 		return id;
@@ -36,5 +37,13 @@ public class Notification {
 
 	public void setLastTrigger(Date lastTrigger) {
 		this.lastTrigger = lastTrigger;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }
