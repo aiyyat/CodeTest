@@ -46,7 +46,6 @@ CREATE UNIQUE INDEX UK_tq3cq3gmsss8jjyb2l5sb1o6k ON subscription (user_id);
 CREATE TABLE `notification` (
   `id` BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `last_trigger` TIMESTAMP DEFAULT NULL,
-  `email_status` VARCHAR(20) NOT NULL,
-  `message` varchar(5000) DEFAULT NULL,
+  `email_status` VARCHAR(20) NOT NULL
   PRIMARY KEY (`id`)
 );

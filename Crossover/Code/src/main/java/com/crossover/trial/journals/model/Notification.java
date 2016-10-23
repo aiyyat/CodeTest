@@ -23,7 +23,6 @@ public class Notification {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "last_trigger")
 	private Date lastTrigger;
-	private String message;
 	@Column(name = "email_status")
 	@Enumerated(EnumType.STRING)
 	private EmailStatus emailSent;
@@ -42,14 +41,6 @@ public class Notification {
 
 	public void setLastTrigger(Date lastTrigger) {
 		this.lastTrigger = lastTrigger;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 
 	public EmailStatus getEmailSent() {

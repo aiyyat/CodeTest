@@ -10,8 +10,10 @@ import static com.crossover.trial.journals.constants.ApplicationConstants.SUBSCR
 import static com.crossover.trial.journals.constants.ApplicationConstants.SUBSCRIBED_EMAIL_NOTIFICATION_SUBJECT;
 import static com.crossover.trial.journals.constants.ApplicationConstants.TRIGGER_INTERVAL_IN_SECONDS;
 import static com.crossover.trial.journals.model.EmailStatus.ERROR;
+import static com.crossover.trial.journals.model.EmailStatus.SENT;
 import static com.crossover.trial.journals.utility.TemporalUtil.format;
 import static com.crossover.trial.journals.utility.TemporalUtil.toDate;
+import static java.lang.Math.min;
 import static java.lang.String.format;
 
 import java.time.LocalDateTime;
@@ -63,6 +65,7 @@ public class NotificationServiceImpl implements NotificationService {
 		final Notification newNote = new Notification();
 		final LocalDateTime now = LocalDateTime.now();
 		newNote.setLastTrigger(toDate(now));
+		newNote.setEmailSent(EmailStatus.BEGIN_POLLING);
 		final StringBuffer s = new StringBuffer(FIRST_TIME_POLL_MESSAGE);
 		try {
 			if (prevNote != null) {
@@ -79,11 +82,13 @@ public class NotificationServiceImpl implements NotificationService {
 				});
 				if (0 < journalCount.get()) {
 					userRepository.findAll().forEach(k -> {
-						String msg = String.format(SCHUDLED_MESSAGE_COMMON, TemporalUtil.format(prevNote.getLastTrigger()));
+						String msg = format(SCHUDLED_MESSAGE_COMMON, format(prevNote.getLastTrigger()));
 						emailNotification(MailMessage.builder().to(k.getEmailId()).subject(msg + "!")
-								.body(format(SCHUDLED_EMAIL_BODY_CONTENT, k.getLoginName(), msg, s.toString())).build());
+								.body(format(SCHUDLED_EMAIL_BODY_CONTENT, k.getLoginName(), msg, s.toString()))
+								.build());
 						log.info("Scheduled Email Triggered to: " + k.getLoginName() + " at " + now);
 					});
+					s.append(SENT);
 				} else {
 					s.append(NO_JOURNALS_ADDED);
 				}
@@ -97,7 +102,6 @@ public class NotificationServiceImpl implements NotificationService {
 		// Do not Send Email the first time around else users mailbox will
 		// be flooded with emails, every time the notification table undergoes
 		// housekeeping
-		newNote.setMessage(s.toString());
 		notificationRepository.save(newNote);
 	}
 
