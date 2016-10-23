@@ -1,5 +1,9 @@
 package com.crossover.trial.journals.controller;
 
+import static com.crossover.trial.journals.constants.ApplicationConstants.SUB_EMAIL_NOTIFICATION_BODY;
+import static com.crossover.trial.journals.constants.ApplicationConstants.SUB_EMAIL_NOTIFICATION_SUBJECT;
+import static java.lang.String.format;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,18 +27,17 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.crossover.trial.journals.Application;
-import com.crossover.trial.journals.builders.MailMessage;
+import com.crossover.trial.journals.constants.ApplicationConstants;
 import com.crossover.trial.journals.model.Category;
 import com.crossover.trial.journals.model.Journal;
+import com.crossover.trial.journals.model.MailMessage;
 import com.crossover.trial.journals.model.Publisher;
 import com.crossover.trial.journals.model.Subscription;
 import com.crossover.trial.journals.repository.PublisherRepository;
 import com.crossover.trial.journals.repository.SubscriptionRepository;
 import com.crossover.trial.journals.service.CurrentUser;
 import com.crossover.trial.journals.service.JournalService;
-import com.crossover.trial.journals.service.helpers.NotificationService;
-
-import ch.qos.logback.classic.net.SyslogAppender;
+import com.crossover.trial.journals.service.NotificationService;
 
 @Controller
 public class PublisherController {
@@ -43,9 +46,6 @@ public class PublisherController {
 
 	@Autowired
 	private PublisherRepository publisherRepository;
-
-	@Autowired
-	private SubscriptionRepository subscriptionRepository;
 
 	@Autowired
 	private JournalService journalService;
@@ -82,17 +82,7 @@ public class PublisherController {
 				journal.setName(name);
 				journalService.publish(publisher.get(), journal, categoryId);
 				// ~Achuth: Newly Added code
-				Category category = new Category();
-				category.setId(categoryId);
-				List<Subscription> subscriptions = subscriptionRepository.findByCategory(category);
-				subscriptions.stream().forEach(s -> {
-					String body = String.format(
-							"Dear %s, \n\n A New Journel was added: \nName: %s\nBy: %s\nOn: %s\nCategory: %s\n\nRegards,\nTeam Medical Journal.",
-							s.getUser().getLoginName(), name, activeUser.getUsername(), journal.getPublishDate(),
-							s.getCategory().getName());
-					notificationService.emailNotification(MailMessage.builder().to(s.getUser().getEmailId())
-							.subject("Medical Jounel: New Journel Added!! " + name).body(body).build());
-				});
+				notificationService.notifyNewJournal(journal);
 				// ~Achuth: End
 				return "redirect:/publisher/browse";
 			} catch (Exception e) {

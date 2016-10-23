@@ -16,7 +16,6 @@ import com.crossover.trial.journals.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
-
 	@Autowired
 	private UserRepository userRepository;
 
@@ -59,5 +58,4 @@ public class UserServiceImpl implements UserService {
 	public User findById(Long id) {
 		return userRepository.findOne(id);
 	}
-
 }

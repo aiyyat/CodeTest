@@ -1,6 +1,9 @@
 package com.crossover.trial.journals.repository;
 
-import java.text.SimpleDateFormat;
+import static com.crossover.trial.journals.model.EmailStatus.NOT_SENT;
+import static com.crossover.trial.journals.utility.TemporalUtil.format;
+import static java.util.Calendar.DAY_OF_MONTH;
+
 import java.util.Calendar;
 
 import org.junit.Test;
@@ -11,8 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.crossover.trial.journals.Application;
+import com.crossover.trial.journals.model.EmailStatus;
 import com.crossover.trial.journals.model.Notification;
-import com.crossover.trial.journals.repository.NotificationRepository;
 
 import junit.framework.TestCase;
 
@@ -27,17 +30,18 @@ public class NotificationRepositoryTest {
 	public void test() throws Exception {
 		Calendar earlier = Calendar.getInstance();
 		Calendar later = Calendar.getInstance();
-		later.add(10, Calendar.DAY_OF_MONTH);
+		later.add(10, DAY_OF_MONTH);
 
 		Notification ns = new Notification();
 		ns.setLastTrigger(later.getTime());
+		ns.setEmailSent(NOT_SENT);
 		n.save(ns);
 
 		ns = new Notification();
 		ns.setLastTrigger(earlier.getTime());
+		ns.setEmailSent(NOT_SENT);
 		n.save(ns);
-		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		TestCase.assertEquals(s.format(later.getTime()),
-				s.format(n.findTopByOrderByLastTriggerDesc().getLastTrigger()));
+
+		TestCase.assertEquals(format(later.getTime()), format(n.findTopByOrderByLastTriggerDesc().getLastTrigger()));
 	}
 }

@@ -5,7 +5,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import com.crossover.trial.journals.builders.MailMessage;
+import com.crossover.trial.journals.model.MailMessage;
 
 @Service
 public class EmailServiceImpl implements EmailService {

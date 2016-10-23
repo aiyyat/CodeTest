@@ -18,12 +18,4 @@ public class EmailServiceTest {
 	@Before
 	public void setup() throws Exception {
 	}
-
-	@Autowired
-	EmailService emailService;
-
-	@Test
-	public void sendEmail() throws Exception {
-		emailService.sendMessage("Hello World!");
-	}
 }

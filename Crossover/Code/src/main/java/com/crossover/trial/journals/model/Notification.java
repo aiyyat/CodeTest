@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -22,6 +24,9 @@ public class Notification {
 	@Column(name = "last_trigger")
 	private Date lastTrigger;
 	private String message;
+	@Column(name = "email_status")
+	@Enumerated(EnumType.STRING)
+	private EmailStatus emailSent;
 
 	public Long getId() {
 		return id;
@@ -45,5 +50,13 @@ public class Notification {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public EmailStatus getEmailSent() {
+		return emailSent;
+	}
+
+	public void setEmailSent(EmailStatus emailSent) {
+		this.emailSent = emailSent;
 	}
 }

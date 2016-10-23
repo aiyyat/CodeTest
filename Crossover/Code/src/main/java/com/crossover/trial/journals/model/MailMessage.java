@@ -1,5 +1,13 @@
-package com.crossover.trial.journals.builders;
+package com.crossover.trial.journals.model;
 
+/**
+ * Encapsulates the attributes of an email message.
+ * 
+ * Immutable Class - create instance using the inherent builder.
+ * 
+ * @author achuth
+ *
+ */
 public class MailMessage {
 	private String to;
 	private String body;
