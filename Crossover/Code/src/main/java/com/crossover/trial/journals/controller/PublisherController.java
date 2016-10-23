@@ -1,7 +1,7 @@
 package com.crossover.trial.journals.controller;
 
-import static com.crossover.trial.journals.constants.ApplicationConstants.SUB_EMAIL_NOTIFICATION_BODY;
-import static com.crossover.trial.journals.constants.ApplicationConstants.SUB_EMAIL_NOTIFICATION_SUBJECT;
+import static com.crossover.trial.journals.constants.ApplicationConstants.SUBSCRIBED_EMAIL_NOTIFICATION_BODY;
+import static com.crossover.trial.journals.constants.ApplicationConstants.SUBSCRIBED_EMAIL_NOTIFICATION_SUBJECT;
 import static java.lang.String.format;
 
 import java.io.BufferedOutputStream;
