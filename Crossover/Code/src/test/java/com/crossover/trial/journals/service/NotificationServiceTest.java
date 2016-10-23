@@ -36,7 +36,7 @@ import junit.framework.TestCase;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class NotificationServiceTest {
 	@Autowired
-	NotificationServiceImpl notificationService;
+	NotificationService notificationService;
 	@Autowired
 	JournalRepository jRepo;
 	@Autowired

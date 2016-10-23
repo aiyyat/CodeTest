@@ -13,7 +13,7 @@ import static com.crossover.trial.journals.model.NotificationStatus.BEGIN_POLLIN
 import static com.crossover.trial.journals.model.NotificationStatus.ERROR;
 import static com.crossover.trial.journals.model.NotificationStatus.NO_NEW_JOURNALS;
 import static com.crossover.trial.journals.model.NotificationStatus.SENT;
-import static com.crossover.trial.journals.utility.TemporalUtil.format;
+import static com.crossover.trial.journals.utility.TemporalUtil.asString;
 import static com.crossover.trial.journals.utility.TemporalUtil.toDate;
 import static com.crossover.trial.journals.utility.TemporalUtil.toLocalDateTime;
 import static java.lang.String.format;
@@ -37,6 +37,7 @@ import com.crossover.trial.journals.repository.NotificationRepository;
 import com.crossover.trial.journals.repository.SubscriptionRepository;
 import com.crossover.trial.journals.repository.UserRepository;
 import com.crossover.trial.journals.service.helpers.EmailService;
+import com.crossover.trial.journals.utility.TemporalUtil;
 
 /**
  * Handles Scheduled User Notification
@@ -82,11 +83,11 @@ public class NotificationServiceImpl implements NotificationService {
 				s.setLength(0);
 				journalRepository.findBypublishDateAfter(prevNote.getLastTrigger()).forEach(j -> {
 					s.append(format(SCHUDLED_NEW_JOURNAL_TITLE, journalCount.incrementAndGet(), j.getName(),
-							j.getPublisher().getName(), format(j.getPublishDate()), j.getCategory().getName()));
+							j.getPublisher().getName(), asString(j.getPublishDate()), j.getCategory().getName()));
 				});
 				if (0 < journalCount.get()) {
 					userRepository.findAll().forEach(k -> {
-						String msg = format(SCHUDLED_MESSAGE_COMMON, format(prevNote.getLastTrigger()));
+						String msg = format(SCHUDLED_MESSAGE_COMMON, asString(prevNote.getLastTrigger()));
 						messages.add(MailMessage.builder().to(k.getEmailId()).subject(msg + "!")
 								.body(format(SCHUDLED_EMAIL_BODY_CONTENT, k.getLoginName(), msg, s.toString()))
 								.build());
@@ -122,7 +123,7 @@ public class NotificationServiceImpl implements NotificationService {
 		List<Subscription> subscriptions = subscriptionRepository.findByCategory(journal.getCategory());
 		subscriptions.stream().forEach(s -> {
 			String body = format(SUBSCRIBED_EMAIL_NOTIFICATION_BODY, s.getUser().getLoginName(), journal.getName(),
-					journal.getPublisher().getName(), format(journal.getPublishDate()), s.getCategory().getName());
+					journal.getPublisher().getName(), asString(journal.getPublishDate()), s.getCategory().getName());
 			messages.add(MailMessage.builder().to(s.getUser().getEmailId())
 					.subject(format(SUBSCRIBED_EMAIL_NOTIFICATION_SUBJECT, journal.getName())).body(body).build());
 		});
