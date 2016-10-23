@@ -1,4 +1,4 @@
-package com.crossover.trial.journals.service;
+package com.crossover.trial.journals.rest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -29,7 +29,7 @@ import com.crossover.trial.journals.service.UserService;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class NotificationServiceTest {
+public class JournalServiceTest {
 
 	private final static String NEW_JOURNAL_NAME = "New Journal";
 
@@ -37,7 +37,7 @@ public class NotificationServiceTest {
 	private JournalService journalService;
 
 	@Autowired
-	private NotificationSerice userService;
+	private UserService userService;
 
 	@Autowired
 	private PublisherRepository publisherRepository;
