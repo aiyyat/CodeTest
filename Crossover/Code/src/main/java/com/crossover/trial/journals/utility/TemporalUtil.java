@@ -5,6 +5,12 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
+/**
+ * Utility to deal all the Date/Time Related Utiltiy operations.
+ * 
+ * @author achuth
+ *
+ */
 public class TemporalUtil {
 	private static final SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 

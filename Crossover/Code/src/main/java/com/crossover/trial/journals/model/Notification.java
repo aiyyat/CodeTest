@@ -11,7 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
+/**
+ * Table to define all the 
+ * @author achuth
+ *
+ */
 @Entity
 @Table(name = "notification")
 public class Notification {
