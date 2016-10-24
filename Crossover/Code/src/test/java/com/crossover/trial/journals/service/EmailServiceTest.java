@@ -29,7 +29,7 @@ public class EmailServiceTest {
 	}
 
 	@Test
-	public void testBadEmailServiceCall() {
+	public void testEmailConfigurationNMailSend() {
 		MailMessage m = MailMessage.builder().to("test@test.com").body("test").subject("subject").build();
 		notificationService.sendMessage(m);
 		TestCase.assertEquals(m.getBody(), "test");
