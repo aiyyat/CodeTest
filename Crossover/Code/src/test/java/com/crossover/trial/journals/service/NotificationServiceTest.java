@@ -65,6 +65,7 @@ public class NotificationServiceTest {
 		s.setDate(Calendar.getInstance().getTime());
 		s.setUser(u);
 		s.setCategory(c);
+		sRepo.save(s);
 		j.setName("New Journal");
 		j.setUuid(UUID.randomUUID().toString());
 		p.setName("Test Publisher1");
@@ -80,13 +81,11 @@ public class NotificationServiceTest {
 
 	@After
 	public void tearDown() {
-		Subscription s2 = new Subscription();
-		s2.setId(s.getId());
-		sRepo.delete(s);
-		jRepo.delete(j);
-		pRepo.delete(p);
-		uRepo.delete(u);
-
+		Subscription s2 = sRepo.findOne(s.getId());
+		sRepo.delete(s2);
+		jRepo.delete(jRepo.findOne(j.getId()));
+		pRepo.delete(pRepo.findOne(p.getId()));
+		uRepo.delete(uRepo.findOne(u.getId()));
 	}
 
 	@Test

@@ -119,7 +119,7 @@ public class JournalServiceTest {
 		journals = journalService.publisherList(p.get());
 		assertEquals(2, journals.size());
 		assertEquals(new Long(3), journals.get(0).getId());
-		assertEquals(new Long(4), journals.get(1).getId());
+		assertEquals(new Long(6), journals.get(1).getId());
 		assertEquals("Health", journals.get(0).getName());
 		assertEquals(NEW_JOURNAL_NAME, journals.get(1).getName());
 		journals.stream().forEach(j -> assertNotNull(j.getPublishDate()));
@@ -130,7 +130,7 @@ public class JournalServiceTest {
 	public void unPublishFail() {
 		User user = getUser("publisher1");
 		Optional<Publisher> p = publisherRepository.findByUser(user);
-		journalService.unPublish(p.get(), 4L);
+		journalService.unPublish(p.get(), 6L);
 	}
 
 	@Test(expected = ServiceException.class)
@@ -144,7 +144,7 @@ public class JournalServiceTest {
 	public void unPublishSuccess() {
 		User user = getUser("publisher2");
 		Optional<Publisher> p = publisherRepository.findByUser(user);
-		journalService.unPublish(p.get(), 4L);
+		journalService.unPublish(p.get(), 6L);
 
 		List<Journal> journals = journalService.publisherList(p.get());
 		assertEquals(1, journals.size());

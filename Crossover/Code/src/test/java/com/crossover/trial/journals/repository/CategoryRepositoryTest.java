@@ -1,7 +1,5 @@
 package com.crossover.trial.journals.repository;
 
-import static com.crossover.trial.journals.model.NotificationStatus.SENT;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

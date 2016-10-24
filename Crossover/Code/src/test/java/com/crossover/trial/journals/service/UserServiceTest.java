@@ -1,6 +1,5 @@
 package com.crossover.trial.journals.service;
 
-import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.junit.Test;
