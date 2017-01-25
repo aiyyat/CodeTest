@@ -32,6 +32,8 @@ public class EateryUtility {
 				x[i] = s.nextInt();
 				y[i] = s.nextInt();
 			}
+		} catch (Throwable e) {
+			throw new InvalidInputFormatException(e);
 		}
 		return perform(t, y, x, n);
 	}

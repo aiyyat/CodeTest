@@ -12,7 +12,7 @@ import com.technicalyorker.dbs.gorden.service.EateryService;
 
 @SpringBootApplication
 public class DbsApplication {
-	org.apache.log4j.Logger logger = LoggerFactory.getLogger(DbsApplication.class);
+	private static final Logger logger = LoggerFactory.getLogger(DbsApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(DbsApplication.class, args);
