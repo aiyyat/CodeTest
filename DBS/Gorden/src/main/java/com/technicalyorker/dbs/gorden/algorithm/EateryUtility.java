@@ -10,6 +10,13 @@ import org.springframework.stereotype.Component;
 
 import com.technicalyorker.dbs.gorden.exception.InvalidInputFormatException;
 
+/**
+ * EateryUtility is a Spring Component Managed Bean and implements KnapSack
+ * Algorithm to find the max satisfaction for a variety of dishes.
+ * 
+ * @author achuth
+ *
+ */
 @Component
 public class EateryUtility {
 	private static final Logger logger = LoggerFactory.getLogger(EateryUtility.class);
@@ -59,8 +66,8 @@ public class EateryUtility {
 			}
 		}
 		String text = String.format(
-				"Input: \nTime Limit:%s\nEating Times:%s\nDegree Of Satisfaction:%s\nMenu Item Count:%s\n", timeLimit,
-				Arrays.toString(eatingTimes), Arrays.toString(degreeOfSatisfactions), menuItemCount,
+				"\nInput: \n\tTime Limit: %s\n\tEating Times: %s\n\tDegree Of Satisfaction: %s\n\tMenu Item Count:%s\nOutput: \n\tMax Sat. Degree:%s\n",
+				timeLimit, Arrays.toString(eatingTimes), Arrays.toString(degreeOfSatisfactions), menuItemCount,
 				satisfactionMatrix[menuItemCount][timeLimit]);
 		logger.debug(text);
 		return satisfactionMatrix[menuItemCount][timeLimit];
