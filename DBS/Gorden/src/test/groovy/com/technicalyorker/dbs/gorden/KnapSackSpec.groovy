@@ -4,7 +4,7 @@ import com.technicalyorker.dbs.gorden.algorithm.*;
 
 class KnapSackEaterySpec extends Specification{
 	def "the most ordinary of scenarios"() {
-		print("calling test!")
+		print("invoking test!")
 		when: "KnapSackEatery is initialized"
 		EateryUtility k = new EateryUtility();
 		then: "Calculate the greatest Satisfaction and Compare it with result"
