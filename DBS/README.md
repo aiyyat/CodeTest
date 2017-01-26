@@ -16,5 +16,7 @@ Solution:
 The application uses KnapSack Algorithm to find the Maximum Satisfaction. The value is 2493893.
 The testcase file is under: resources folder
 To run the application use maven -e clean install. 
+<br>
 Output:
+<br>
 ![alt tag](https://github.com/technicalyorker/misc/blob/master/DBS/support/screenshot.png)
