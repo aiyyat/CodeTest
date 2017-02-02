@@ -26,8 +26,7 @@ public class PostFixEvaluator {
 	Stack<Expression> stack = new Stack<>();
 
 	public Expression evaluate(String str) {
-		String split[] = str.split(" ");
-		for (String s : split) {
+		for (String s : str.split(" ")) {
 			if (Util.isNumeric(s)) {
 				stack.push(new NumberExpression(s));
 			} else {

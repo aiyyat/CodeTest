@@ -26,7 +26,7 @@ public class OperationExpressionFactory {
 		} else if (s.equals("Sine")) {
 			return new SineExpression();
 		} else {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Unknown command: " + s);
 		}
 	}
 }
