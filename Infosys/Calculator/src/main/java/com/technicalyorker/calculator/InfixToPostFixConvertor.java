@@ -17,7 +17,7 @@ public class InfixToPostFixConvertor {
 	 * Higher the value more is preference
 	 */
 
-	public String perform(String infix) {
+	public String convert(String infix) {
 		StringBuilder output = new StringBuilder();
 		Stack<String> stack = new Stack<>();
 		for (String token : infix.split(" ")) {
@@ -41,12 +41,5 @@ public class InfixToPostFixConvertor {
 		while (!stack.isEmpty())
 			output.append(stack.pop()).append(' ');
 		return output.toString();
-	}
-
-	public static void main(String[] args) {
-		System.out.println(new InfixToPostFixConvertor().perform("( 5 + 7 ) * 2"));
-		System.out.println(new InfixToPostFixConvertor().perform("Tan 45"));
-		// System.out.println(new InfixToPostFixConvertor().perform("5 + 7 /
-		// 2"));
 	}
 }

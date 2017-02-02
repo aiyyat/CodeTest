@@ -1,7 +1,9 @@
 package com.technicalyorker.calculator;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
+import com.technicalyorker.calculator.exception.InvalidPostFixExpressionException;
 import com.technicalyorker.calculator.expression.Expression;
 import com.technicalyorker.calculator.expression.NumberExpression;
 import com.technicalyorker.calculator.expression.OperationExpression;
@@ -13,31 +15,25 @@ import com.technicalyorker.calculator.util.Util;
  *
  */
 public class PostFixEvaluator {
-	public static void main(String[] args) {
-		new PostFixEvaluator().perform();
-	}
-
-	private void perform() {
-		// System.out.println(evaluate("4 3 2 - 1 + *").toString());
-		// System.out.println(evaluate("3 4 5 + Sine *").toString());
-		System.out.println(evaluate("5 2 4 1 - ^ +").toString());
-	}
-
-	Stack<Expression> stack = new Stack<>();
+	private static final Stack<Expression> stack = new Stack<>();
 
 	public Expression evaluate(String str) {
-		for (String s : str.split(" ")) {
-			if (Util.isNumeric(s)) {
-				stack.push(new NumberExpression(s));
-			} else {
-				OperationExpression p = OperationExpressionFactory.getOperationExpression(s);
-				Expression[] es = new Expression[p.getInputOperandCount()];
-				for (int i = 0; i < p.getInputOperandCount(); i++) {
-					es[i] = stack.pop();
+		try {
+			for (String s : str.split(" ")) {
+				if (Util.isNumeric(s)) {
+					stack.push(new NumberExpression(s));
+				} else {
+					OperationExpression p = OperationExpressionFactory.getOperationExpression(s);
+					Expression[] es = new Expression[p.getInputOperandCount()];
+					for (int i = 0; i < p.getInputOperandCount(); i++) {
+						es[i] = stack.pop();
+					}
+					p.setInputOperands(es);
+					stack.push(new NumberExpression(p.evaluate()));
 				}
-				p.setInputOperands(es);
-				stack.push(new NumberExpression(p.evaluate()));
 			}
+		} catch (EmptyStackException e) {
+			throw new InvalidPostFixExpressionException("Invalid PostFixExpression: " + str);
 		}
 		return stack.pop();
 	}

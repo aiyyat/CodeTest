@@ -5,6 +5,6 @@ public class CalculatorEngine {
 	private static final PostFixEvaluator evaluator = new PostFixEvaluator();
 
 	public Double calculate(String str) {
-		return evaluator.evaluate(convertor.perform(str)).evaluate();
+		return evaluator.evaluate(convertor.convert(str)).evaluate();
 	}
 }
