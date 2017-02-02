@@ -14,7 +14,7 @@ public class Calculator {
 					"Welcome to Technical Yorker Calculator App!!\n Operations Supported in this release: \n\t\t+\n\t\t-\n\t\t/\n\t\t*\n\t\t^\n\t\tSine\n\t\tTan\n\n Usage: Calculator <expression to Calculate> \n"
 							+ " e.g. Calculator \"3 * ( 4 + 5 )\" \n Calculator 3 * Sin 30");
 		} else {
-			System.out.printf("Input: %s \nOutput: %s ", args[0], engine.calculate(args[0]));
+			System.out.printf("Input: %s \nOutput: %s\n", args[0], engine.calculate(args[0]));
 		}
 	}
 }
