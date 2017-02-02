@@ -1,4 +1,4 @@
-package com.technicalyorker.calculator.expression.factory;
+package com.technicalyorker.calculator.expression.definition.factory;
 
 import com.technicalyorker.calculator.expression.DivideExpression;
 import com.technicalyorker.calculator.expression.ExponentExpression;
@@ -7,6 +7,7 @@ import com.technicalyorker.calculator.expression.MultiplyExpression;
 import com.technicalyorker.calculator.expression.OperationExpression;
 import com.technicalyorker.calculator.expression.PlusExpression;
 import com.technicalyorker.calculator.expression.SineExpression;
+import com.technicalyorker.calculator.expression.TanExpression;
 
 public class OperationExpressionFactory {
 	private OperationExpressionFactory() {
@@ -25,6 +26,8 @@ public class OperationExpressionFactory {
 			return new ExponentExpression();
 		} else if (s.equals("Sine")) {
 			return new SineExpression();
+		} else if (s.equals("Tan")) {
+			return new TanExpression();
 		} else {
 			throw new IllegalArgumentException("Unknown command: " + s);
 		}

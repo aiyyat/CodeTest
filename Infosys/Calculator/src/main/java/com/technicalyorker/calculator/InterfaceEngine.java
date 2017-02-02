@@ -22,5 +22,6 @@ public class InterfaceEngine {
 
 	public static void main(String[] args) {
 		System.out.println(new InterfaceEngine().calculate("( 5 + 7 ) * 2"));
+		System.out.println(new InterfaceEngine().calculate("Tan 45"));
 	}
 }
