@@ -2,13 +2,19 @@ package com.technicalyorker.calculator;
 
 import java.util.Stack;
 
+import com.technicalyorker.calculator.expression.Expression;
+import com.technicalyorker.calculator.expression.NumberExpression;
+import com.technicalyorker.calculator.expression.OperationExpression;
+import com.technicalyorker.calculator.expression.factory.OperationExpressionFactory;
+import com.technicalyorker.calculator.util.Util;
+
 /**
  * Hello world!
  *
  */
-public class App {
+public class PostFixEvaluator {
 	public static void main(String[] args) {
-		new App().perform();
+		new PostFixEvaluator().perform();
 	}
 
 	private void perform() {
@@ -22,25 +28,10 @@ public class App {
 	public Expression evaluate(String str) {
 		String split[] = str.split(" ");
 		for (String s : split) {
-			if (isNumeric(s)) {
+			if (Util.isNumeric(s)) {
 				stack.push(new NumberExpression(s));
 			} else {
-				OperationExpression p;
-				if (s.equals("+")) {
-					p = new PlusExpression();
-				} else if (s.equals("-")) {
-					p = new MinusExpression();
-				} else if (s.equals("*")) {
-					p = new MultiplyExpression();
-				} else if (s.equals("/")) {
-					p = new DivideExpression();
-				} else if (s.equals("^")) {
-					p = new ExponentExpression();
-				} else if (s.equals("Sine")) {
-					p = new SineExpression();
-				} else {
-					throw new IllegalArgumentException();
-				}
+				OperationExpression p = OperationExpressionFactory.getOperationExpression(s);
 				Expression[] es = new Expression[p.getInputCount()];
 				for (int i = 0; i < p.getInputCount(); i++) {
 					es[i] = stack.pop();
@@ -50,9 +41,5 @@ public class App {
 			}
 		}
 		return stack.pop();
-	}
-
-	public static boolean isNumeric(String str) {
-		return str.matches("-?\\d+(.\\d+)?");
 	}
 }

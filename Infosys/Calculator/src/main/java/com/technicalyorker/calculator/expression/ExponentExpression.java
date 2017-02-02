@@ -1,4 +1,4 @@
-package com.technicalyorker.calculator;
+package com.technicalyorker.calculator.expression;
 
 public class ExponentExpression extends AbstractDualOperationExpression {
 	@Override

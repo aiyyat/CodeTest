@@ -1,4 +1,4 @@
-package com.technicalyorker.calculator;
+package com.technicalyorker.calculator.expression;
 
 public abstract class AbstractOperationExpression implements OperationExpression {
 	Expression[] e;

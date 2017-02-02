@@ -1,4 +1,4 @@
-package com.technicalyorker.calculator;
+package com.technicalyorker.calculator.expression;
 
 public interface OperationExpression extends Expression {
 	public int getInputCount();
