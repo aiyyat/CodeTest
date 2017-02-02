@@ -15,5 +15,5 @@ ScreenShot:<br>
 <br>Tree:<br>
 ![alt tag](https://github.com/technicalyorker/misc/blob/master/Infosys/Calculator/resources/tree.png)
 <br>help:<br>
-![alt tag](https://github.com/technicalyorker/misc/blob/master/Infosys/Calculator/resources/help.gif)
+![alt tag](https://github.com/technicalyorker/misc/blob/master/Infosys/Calculator/resources/help.png)
 
