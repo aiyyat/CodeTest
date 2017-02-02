@@ -9,6 +9,11 @@ import java.util.Stack;
 import com.technicalyorker.calculator.exception.InvalidInputOperandCalculatorException;
 import com.technicalyorker.calculator.util.Util;
 
+/**
+ * 
+ * @author achuth
+ *
+ */
 public class InfixToPostFixConvertor {
 	Deque<String> stack = new LinkedList<>();
 	StringBuffer output = new StringBuffer("");

@@ -1,5 +1,10 @@
 package com.technicalyorker.calculator.expression;
 
+/**
+ * 
+ * @author achuth
+ *
+ */
 public class TanExpression extends AbstractSingleOperandOperationExpression {
 
 	@Override

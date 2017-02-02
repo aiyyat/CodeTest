@@ -1,5 +1,6 @@
 package com.technicalyorker.calculator.expression.definition.factory;
 
+import com.technicalyorker.calculator.exception.IllegalCommandOperationException;
 import com.technicalyorker.calculator.expression.DivideExpression;
 import com.technicalyorker.calculator.expression.ExponentExpression;
 import com.technicalyorker.calculator.expression.MinusExpression;
@@ -8,8 +9,13 @@ import com.technicalyorker.calculator.expression.OperationExpression;
 import com.technicalyorker.calculator.expression.PlusExpression;
 import com.technicalyorker.calculator.expression.SineExpression;
 import com.technicalyorker.calculator.expression.TanExpression;
-import com.technicalyorker.calculator.expression.definition.exception.IllegalCommandOperationException;
 
+/**
+ * Factory for creating operations object.
+ * 
+ * @author achuth
+ *
+ */
 public class OperationExpressionFactory {
 	private OperationExpressionFactory() {
 	}

@@ -1,5 +1,10 @@
 package com.technicalyorker.calculator.expression;
 
+/**
+ * 
+ * @author achuth
+ *
+ */
 public class PlusExpression extends AbstractDualOperandOperationExpression {
 	@Override
 	public Double evaluate() {

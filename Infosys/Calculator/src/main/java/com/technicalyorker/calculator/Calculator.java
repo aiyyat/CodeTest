@@ -1,5 +1,10 @@
 package com.technicalyorker.calculator;
 
+/**
+ * 
+ * @author achuth
+ *
+ */
 public class Calculator {
 	private static final CalculatorEngine engine = new CalculatorEngine();
 

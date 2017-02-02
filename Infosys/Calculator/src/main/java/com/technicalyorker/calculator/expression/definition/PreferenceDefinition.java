@@ -3,6 +3,12 @@ package com.technicalyorker.calculator.expression.definition;
 import java.util.Hashtable;
 import java.util.Map;
 
+/**
+ * Preference order definition
+ * 
+ * @author achuth
+ *
+ */
 public class PreferenceDefinition {
 	static final Map<String, Integer> preferenceTable = new Hashtable<>();
 	static {

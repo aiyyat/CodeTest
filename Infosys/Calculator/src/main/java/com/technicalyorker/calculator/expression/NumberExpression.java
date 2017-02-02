@@ -1,5 +1,11 @@
 package com.technicalyorker.calculator.expression;
 
+/**
+ * An Expression that is a representation of a Number
+ * 
+ * @author achuth
+ *
+ */
 public class NumberExpression implements Expression {
 	private Double val;
 
