@@ -1,10 +1,10 @@
 package com.technicalyorker.calculator.expression;
 
-public class SineExpression extends AbstractSingleOperationExpression {
+public class SineExpression extends AbstractSingleOperandOperationExpression {
 
 	@Override
 	public Double evaluate() {
-		return Math.sin(getInputs()[0].evaluate());
+		return Math.sin(getInputOperands()[0].evaluate());
 	}
 
 }

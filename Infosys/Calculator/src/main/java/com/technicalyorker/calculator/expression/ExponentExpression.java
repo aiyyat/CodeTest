@@ -1,8 +1,8 @@
 package com.technicalyorker.calculator.expression;
 
-public class ExponentExpression extends AbstractDualOperationExpression {
+public class ExponentExpression extends AbstractDualOperandOperationExpression {
 	@Override
 	public Double evaluate() {
-		return Math.pow(getInputs()[1].evaluate(), getInputs()[0].evaluate());
+		return Math.pow(getInputOperands()[1].evaluate(), getInputOperands()[0].evaluate());
 	}
 }

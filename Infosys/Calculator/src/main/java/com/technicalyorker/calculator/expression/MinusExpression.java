@@ -1,8 +1,8 @@
 package com.technicalyorker.calculator.expression;
 
-public class MinusExpression extends AbstractDualOperationExpression {
+public class MinusExpression extends AbstractDualOperandOperationExpression {
 	@Override
 	public Double evaluate() {
-		return getInputs()[1].evaluate() - getInputs()[0].evaluate();
+		return getInputOperands()[1].evaluate() - getInputOperands()[0].evaluate();
 	}
 }

@@ -1,9 +1,9 @@
 package com.technicalyorker.calculator.expression;
 
 public interface OperationExpression extends Expression {
-	public int getInputCount();
+	public int getInputOperandCount();
 
-	public void setInputs(Expression... expressions);
+	public void setInputOperands(Expression... expressions);
 
-	public Expression[] getInputs();
+	public Expression[] getInputOperands();
 }

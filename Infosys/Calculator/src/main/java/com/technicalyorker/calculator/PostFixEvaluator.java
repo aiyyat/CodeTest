@@ -32,11 +32,11 @@ public class PostFixEvaluator {
 				stack.push(new NumberExpression(s));
 			} else {
 				OperationExpression p = OperationExpressionFactory.getOperationExpression(s);
-				Expression[] es = new Expression[p.getInputCount()];
-				for (int i = 0; i < p.getInputCount(); i++) {
+				Expression[] es = new Expression[p.getInputOperandCount()];
+				for (int i = 0; i < p.getInputOperandCount(); i++) {
 					es[i] = stack.pop();
 				}
-				p.setInputs(es);
+				p.setInputOperands(es);
 				stack.push(new NumberExpression(p.evaluate()));
 			}
 		}
