@@ -8,6 +8,7 @@ import com.technicalyorker.calculator.expression.OperationExpression;
 import com.technicalyorker.calculator.expression.PlusExpression;
 import com.technicalyorker.calculator.expression.SineExpression;
 import com.technicalyorker.calculator.expression.TanExpression;
+import com.technicalyorker.calculator.expression.definition.exception.IllegalCommandOperationException;
 
 public class OperationExpressionFactory {
 	private OperationExpressionFactory() {
@@ -29,7 +30,7 @@ public class OperationExpressionFactory {
 		} else if (s.equals("Tan")) {
 			return new TanExpression();
 		} else {
-			throw new IllegalArgumentException("Unknown command: " + s);
+			throw new IllegalCommandOperationException("Unknown command: " + s);
 		}
 	}
 }
