@@ -5,7 +5,7 @@ import java.util.Stack;
 import com.technicalyorker.calculator.expression.Expression;
 import com.technicalyorker.calculator.expression.NumberExpression;
 import com.technicalyorker.calculator.expression.OperationExpression;
-import com.technicalyorker.calculator.expression.factory.OperationExpressionFactory;
+import com.technicalyorker.calculator.expression.definition.factory.OperationExpressionFactory;
 import com.technicalyorker.calculator.util.Util;
 
 /**

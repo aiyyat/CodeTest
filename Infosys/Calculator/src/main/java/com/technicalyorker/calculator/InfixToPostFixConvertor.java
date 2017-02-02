@@ -1,7 +1,7 @@
 package com.technicalyorker.calculator;
 
-import static com.technicalyorker.calculator.expression.definition.PreferenceTableDefinition.getPreferenceDefinition;
-
+import static com.technicalyorker.calculator.expression.definition.PreferenceDefinition.getDefinition;
+import static com.technicalyorker.calculator.expression.definition.PreferenceDefinition.higerPref;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Stack;
@@ -14,16 +14,11 @@ public class InfixToPostFixConvertor {
 	 * Higher the value more is preference
 	 */
 
-	private boolean higerPref(String ch1, String ch2) {
-		return getPreferenceDefinition().containsKey(ch2)
-				&& (getPreferenceDefinition().get(ch2).compareTo(getPreferenceDefinition().get(ch1)) >= 0);
-	}
-
 	public String perform(String infix) {
 		StringBuilder output = new StringBuilder();
 		Stack<String> stack = new Stack<>();
 		for (String token : infix.split(" ")) {
-			if (getPreferenceDefinition().containsKey(token)) {
+			if (getDefinition().containsKey(token)) {
 				while (!stack.isEmpty() && higerPref(token, stack.peek()))
 					output.append(stack.pop()).append(' ');
 				stack.push(token);
@@ -40,7 +35,6 @@ public class InfixToPostFixConvertor {
 
 		while (!stack.isEmpty())
 			output.append(stack.pop()).append(' ');
-
 		return output.toString();
 	}
 
