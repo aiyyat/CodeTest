@@ -10,6 +10,7 @@ public class PreferenceDefinition {
 		preferenceTable.put("-", 1);
 		preferenceTable.put("*", 2);
 		preferenceTable.put("/", 2);
+		preferenceTable.put("^", 3);
 		preferenceTable.put("Sine", 3);
 		preferenceTable.put("Tan", 3);
 	}
@@ -19,7 +20,6 @@ public class PreferenceDefinition {
 	}
 
 	public static boolean higerPref(String ch1, String ch2) {
-		return getDefinition().containsKey(ch2)
-				&& (getDefinition().get(ch2).compareTo(getDefinition().get(ch1)) >= 0);
+		return getDefinition().containsKey(ch2) && (getDefinition().get(ch2).compareTo(getDefinition().get(ch1)) >= 0);
 	}
 }

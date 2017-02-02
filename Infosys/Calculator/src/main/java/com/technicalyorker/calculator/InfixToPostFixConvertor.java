@@ -6,6 +6,9 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Stack;
 
+import com.technicalyorker.calculator.exception.InvalidInputOperandCalculatorException;
+import com.technicalyorker.calculator.util.Util;
+
 public class InfixToPostFixConvertor {
 	Deque<String> stack = new LinkedList<>();
 	StringBuffer output = new StringBuffer("");
@@ -28,8 +31,10 @@ public class InfixToPostFixConvertor {
 				while (!stack.peek().equals("("))
 					output.append(stack.pop()).append(' ');
 				stack.pop();
-			} else {
+			} else if (Util.isNumeric(token)) {
 				output.append(token).append(' ');
+			} else {
+				throw new InvalidInputOperandCalculatorException("Invalid Input token: " + token);
 			}
 		}
 
