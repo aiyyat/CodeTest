@@ -1,13 +1,6 @@
 ThoughtWorks Code Test
 =======================
-
-I was browsing through some good questions to try out when I ran into a couple of interesting problems from Thoughtworks.
-
-The ThoughtWorks Code Test Problems are quite Straight Forward to solve.
-Tips to solve the problem:
-1) Adhere to the Design Principles as much as possible. Refer the posting: https://technicalyorker.wordpress.com/2015/04/27/common-software-design-principles/
-2) The unit testcase should be as fine grained as possible. One’s in the code are almost Integration in Nature, since I didn’t feel it worth spending time for the purpose of the blog.
-3) Browse through the book, “Clean Coding” by Robert C Martin if you haven’t yet.
+In ordered to clear any coding testing, remember to adhere to the Design Principles as much as possible. Refer the posting: https://technicalyorker.wordpress.com/2015/04/27/common-software-design-principles/. This not only makes your code reusable and look well written, it also serves as pillars to your framework that you can count on to justify your design. If you haven’t yet, Browse through the book, “Clean Coding” by Robert C Martin. This saves a lot of time in writing effective code and make it more intutive and less theoritical.
 
 Problem Statement:
 ------------------
@@ -15,11 +8,11 @@ https://github.com/technicalyorker/misc/blob/master/ThoughtWorks/resources/quest
 
 Solution to Problem 1: 
 ----------------------
-My Solution revolves round the State Pattern. The way I saw the solution is that the Rover displays different characteristics in different (Direction Facing) States.
+My Solution to the problem statement revolves round the State Pattern. The way I see the solution is that the Rover displays different characteristics in different (Direction Facing) States.
 For e.g. When the Rover is North Facing,
->Moving up would mean incrementing the Y co-ordinate,
->Taking a left turn would mean Rover finds itself Facing West.
->A Right turn from the North would translate into Rover Facing East.
+* Moving up would mean incrementing the Y co-ordinate,
+* Taking a turn left would mean Rover finds itself Facing West wards.
+* A Right turn from the North would translate into Rover Facing East.
 
 Class Diagram:
 ------------------
@@ -31,11 +24,13 @@ https://github.com/technicalyorker/misc/tree/master/ThoughtWorks/src/main/java/c
 URL to TestCases:
 https://github.com/technicalyorker/misc/tree/master/ThoughtWorks/src/test/java/com/thoughtworks/problem1
 
-Solution to Problem 2: My Solution mirrors the ‘Decorator Design Pattern’ or sometimes called a ‘Wrapper Pattern’. ‘Goods’ as described by the problem statement are of different types.
->Goods without any tax
->Good on which Basic Sales Tax are levied
->Imported goods that have imposed Duty
->Imported Good with Sales Tax
+Solution to Problem 2:
+----------------------
+My Solution mirrors the ‘Decorator Design Pattern’ or sometimes called a ‘Wrapper Pattern’. ‘Goods’ as described by the problem statement are of different types.
+* Goods without any tax
+* Good on which Basic Sales Tax are levied
+* Imported goods that have imposed Duty
+* Imported Good with Sales Tax
 are some of the possibilities described in the Use Case.
 
 Implementations of Good include: Books, Chocolates, CD etc.
