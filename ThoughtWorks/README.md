@@ -1,6 +1,6 @@
 ThoughtWorks Code Test
 =======================
-In ordered to clear any coding testing, remember to adhere to the Design Principles as much as possible. Refer the posting: https://technicalyorker.wordpress.com/2015/04/27/common-software-design-principles/. This not only makes your code reusable and look well written, it also serves as pillars to your framework that you can count on to justify your design. If you haven’t yet, Browse through the book, “Clean Coding” by Robert C Martin. This saves a lot of time in writing effective code and make it more intutive and less theoritical.
+In ordered to clear any coding testing, remember to adhere to the Design Principles as much as possible. Refer the posting: https://technicalyorker.wordpress.com/2015/04/27/common-software-design-principles/. This not only makes your code reusable and look well written, it also serves as foundation to your framework that you can count on to justify your design thought process during the discussion. If you haven’t yet, Browse through the book, “Clean Coding” by Robert C Martin. This saves a lot of time in writing effective code and make it more intutive and less theoritical.
 
 Problem Statement:
 ------------------
