@@ -1,6 +1,6 @@
 Problem Statement: https://github.com/technicalyorker/misc/blob/master/Infosys/Calculator/resources/Java%20Tech%20test.pdf
 
-Code primarily follows the Interpreter pattern. It uses two algorithms by one of the undisputed genius of Algorithms - Dijkstra.
+Code primarily follows the Interpreter pattern. It uses two algorithms by one of the undisputed genius of Data Structure - E.W. Dijkstra.
 It uses Shunting-Yard algorithm to convert User's input Infix Expression into Postfix Expression. This expression is processed and provided back to the user.
 
 <br>QA Testing:<br>
