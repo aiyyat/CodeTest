@@ -1,4 +1,4 @@
-package com.technicalyorker.calculator;
+package com.technicalyorker.calculator.algorithm;
 
 import static com.technicalyorker.calculator.expression.definition.PreferenceDefinition.getDefinition;
 import static com.technicalyorker.calculator.expression.definition.PreferenceDefinition.higerPref;

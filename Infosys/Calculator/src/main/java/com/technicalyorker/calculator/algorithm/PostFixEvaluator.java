@@ -1,4 +1,4 @@
-package com.technicalyorker.calculator;
+package com.technicalyorker.calculator.algorithm;
 
 import java.util.EmptyStackException;
 import java.util.Stack;
