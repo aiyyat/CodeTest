@@ -15,7 +15,10 @@ What is the algorithmic complexity of your solution? What if you needed to calcu
  
 Solution
 --------
-The problem was an easy one but the catch is the fact that the problem statement asks to truncate all but 10 characters which most people would ignore because they directly jump into the problem statement. So the tip here is to slow down a bit.
+The problem was an easy one but the catch is the fact that the problem statement asks to truncate all but 10 characters which most people would ignore because they directly jump into the problem statement. So the mainhighlight here are 3 things 
+1) keep the time complexity to N.
+2) use BigIntegers for all computation.
+3) Remember somewhere towards the end of the problem statement it says to trucate the result to 10 digits.
 
 Code: https://github.com/technicalyorker/misc/blob/master/Nasdaq/src/com/technicalyorker/nasdaq/Solution.java
 
