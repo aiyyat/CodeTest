@@ -17,4 +17,4 @@ Solution
 --------
 The problem was an easy one but the catch is the fact that the problem statement asks to truncate all but 10 characters which most people would ignore because they directly jump into the problem statement. So the tip here is to slow down a bit.
 
-Code: 
+Code: https://github.com/technicalyorker/misc/blob/master/Nasdaq/src/com/technicalyorker/nasdaq/Solution.java
