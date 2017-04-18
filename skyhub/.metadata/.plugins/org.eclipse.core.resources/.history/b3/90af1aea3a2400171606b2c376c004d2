@@ -8,11 +8,6 @@ public class TwoMovies implements Comparable<TwoMovies> {
 
 	public TwoMovies(Movie movie1, Movie movie2) {
 		super();
-		if (movie1.getOriginalTitle().compareTo(movie2.getOriginalTitle()) > 0) {
-			this.movie2 = movie1;
-			this.movie1 = movie2;
-			return;
-		}
 		this.movie1 = movie1;
 		this.movie2 = movie2;
 	}
@@ -36,4 +31,5 @@ public class TwoMovies implements Comparable<TwoMovies> {
 		return movie1.getOriginalTitle() + "(" + movie1.getRuntime() + ")  " + movie2.getOriginalTitle() + "("
 				+ movie2.getRuntime() + ")   " + getTime();
 	}
+
 }

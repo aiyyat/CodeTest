@@ -27,6 +27,6 @@ public class Display {
 	}
 
 	public static void main(String[] args) {
-		new Display().display(250);
+		new Display().display(92);
 	}
 }
