@@ -5,6 +5,11 @@ import java.util.LinkedList;
 
 import com.technicalyorker.codetest.skyhubdigital.salestax.items.Good;
 
+/**
+ * 
+ * @author achuth
+ *
+ */
 public class Basket extends LinkedList<Good> {
 	private static final long serialVersionUID = -8528383503757563554L;
 	BigDecimal totalSalesTax = Constants.ZERO;

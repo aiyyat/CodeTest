@@ -2,6 +2,11 @@ package com.technicalyorker.codetest.skyhubdigital.salestax.basket;
 
 import java.math.BigDecimal;
 
+/**
+ * 
+ * @author achuth
+ *
+ */
 public class Constants {
 	public static final BigDecimal ZERO_POINT_ONE = new BigDecimal(".1");
 	public static final BigDecimal ZERO_POINT_ZERO_FIVE = new BigDecimal(".05");

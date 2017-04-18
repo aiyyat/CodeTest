@@ -4,6 +4,11 @@ import java.math.BigDecimal;
 
 import com.technicalyorker.codetest.skyhubdigital.salestax.basket.Constants;
 
+/**
+ * 
+ * @author achuth
+ *
+ */
 public abstract class BasicSalesTaxGood extends Good {
 	@Override
 	BigDecimal getSalesTaxAmount() {

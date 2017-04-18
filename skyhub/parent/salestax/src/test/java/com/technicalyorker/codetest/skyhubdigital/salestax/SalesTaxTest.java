@@ -14,6 +14,11 @@ import com.technicalyorker.codetest.skyhubdigital.salestax.items.Perfume;
 
 import junit.framework.TestCase;
 
+/**
+ * 
+ * @author achuth
+ *
+ */
 public class SalesTaxTest {
 
 	@Test

@@ -3,6 +3,11 @@ package com.technicalyorker.codetest.skyhubdigital.salestax.basket;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+/**
+ * 
+ * @author achuth
+ *
+ */
 public class Util {
 	public static BigDecimal roundTo5Cents(BigDecimal amount) {
 		long amt = amount.multiply(Constants.HUNDRED).longValue();
