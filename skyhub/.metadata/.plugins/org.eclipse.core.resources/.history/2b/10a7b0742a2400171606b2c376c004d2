@@ -1,0 +1,9 @@
+package com.technicalyorker.codetest.skyhubdigital.brackets.util;
+
+import java.util.Stack;
+
+public final class BracketsUtil {
+	public static boolean checkBracket(String str) {
+		Stack<Character> c = new Stack<>();
+	}
+}

@@ -1,0 +1,12 @@
+package com.technicalyorker.codetest.skyhubdigital.salestax.items;
+
+import static com.thoughtworks.problem2.Constants.ZERO_POINT_ONE;
+
+import java.math.BigDecimal;
+
+public abstract class BasicSalesTaxGood extends Good {
+	@Override
+	BigDecimal getSalesTaxAmount() {
+		return getPrice().multiply(ZERO_POINT_ONE);
+	}
+}

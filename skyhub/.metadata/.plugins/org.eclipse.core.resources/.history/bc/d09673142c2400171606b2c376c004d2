@@ -1,0 +1,37 @@
+package com.technicalyorker.codetest.skyhubdigital.brackets.util;
+
+import java.util.Stack;
+
+public final class BracketsUtil {
+	public static boolean checkBracket(String str) {
+		Stack<Character> s = new Stack<>();
+		for (char c : str.toCharArray()) {
+			switch (c) {
+			case '{':
+			case '(':
+			case '[':
+				s.add(c);
+				break;
+			case ']':
+				if (s.peek() != '[') {
+					return false;
+				}
+				break;
+			case '}':
+				if (s.peek() != '}') {
+					return false;
+				}
+				break;
+			case ')':
+				if (s.peek() != '(') {
+					return false;
+				}
+				break;
+			}
+		}
+		if (!s.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+}

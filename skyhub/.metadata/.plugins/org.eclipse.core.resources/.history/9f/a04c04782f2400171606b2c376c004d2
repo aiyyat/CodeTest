@@ -1,0 +1,63 @@
+package com.technicalyorker.codetest.skyhubdigital.recommendation.model;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+public class Movie {
+	@JsonView(Views.Normal.class)
+	private String original_title;
+
+	@JsonView(Views.Normal.class)
+	private String runtime;
+
+	public String getOriginal_title() {
+		return original_title;
+	}
+
+	public void setOriginal_title(String original_title) {
+		this.original_title = original_title;
+	}
+
+	public String getRuntime() {
+		return runtime;
+	}
+
+	public void setRuntime(String runtime) {
+		this.runtime = runtime;
+	}
+
+	@Override
+	public String toString() {
+		return "Movie [original_title=" + original_title + ", runtime=" + runtime + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((original_title == null) ? 0 : original_title.hashCode());
+		result = prime * result + ((runtime == null) ? 0 : runtime.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Movie other = (Movie) obj;
+		if (original_title == null) {
+			if (other.original_title != null)
+				return false;
+		} else if (!original_title.equals(other.original_title))
+			return false;
+		if (runtime == null) {
+			if (other.runtime != null)
+				return false;
+		} else if (!runtime.equals(other.runtime))
+			return false;
+		return true;
+	}
+}

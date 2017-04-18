@@ -1,0 +1,13 @@
+package com.technicalyorker.codetest.skyhubdigital.recommendation;
+
+import java.io.File;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.technicalyorker.codetest.skyhubdigital.recommendation.model.MovieList;
+
+public class MovieLoader {
+	public MovieList loadMovies() {
+		ObjectMapper mapper = new ObjectMapper();
+		Staff obj = mapper.readValue(new File("c:\\file.json"), Staff.class);
+	}
+}

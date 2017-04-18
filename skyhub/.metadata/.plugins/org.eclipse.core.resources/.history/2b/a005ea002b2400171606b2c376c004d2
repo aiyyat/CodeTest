@@ -1,0 +1,12 @@
+package com.technicalyorker.codetest.skyhubdigital.brackets.util;
+
+import org.junit.Test;
+
+import junit.framework.TestCase;
+
+public class BracketsUtilsTest {
+	@Test
+	public void case1() {
+		TestCase.assertTrue(BracketsUtil.checkBracket("{ [ ] ( ) }"));
+	}
+}

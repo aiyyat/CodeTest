@@ -1,0 +1,21 @@
+package com.technicalyorker.codetest.skyhubdigital.recommendation;
+
+import java.io.File;
+import java.io.IOException;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.technicalyorker.codetest.skyhubdigital.recommendation.model.MovieList;
+
+public class MovieDB {
+	public MovieList loadMovies() {
+		MovieList obj = null;
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			obj = mapper.readValue(new File(getClass().getClassLoader().getResource("movies.json").getFile()),
+					MovieList.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return obj;
+	}
+}

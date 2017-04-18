@@ -1,0 +1,7 @@
+package com.technicalyorker.codetest.skyhubdigital.recommendation.model;
+
+public class Movie {
+	@JsonView(Views.Normal.class)
+	private String original_title;
+	private String runtime;
+}
