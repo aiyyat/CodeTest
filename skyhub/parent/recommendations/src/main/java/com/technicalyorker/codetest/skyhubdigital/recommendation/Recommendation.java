@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import com.technicalyorker.codetest.skyhubdigital.recommendation.db.MovieDB;
 import com.technicalyorker.codetest.skyhubdigital.recommendation.model.Movie;
+import com.technicalyorker.codetest.skyhubdigital.recommendation.strategy.KnapsackRecommendationStrategy;
 
 /**
  * 
@@ -14,7 +15,7 @@ public class Recommendation {
 	@Test
 	public void doTest() {
 		Movie[] movies = MovieDB.getMovies();
-		new Knapsack().perform(movies, 325);
+		new KnapsackRecommendationStrategy().perform(movies, 325);
 		// new Knapsack().perform(movies, 92);
 	}
 }
