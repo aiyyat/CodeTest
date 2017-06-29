@@ -48,7 +48,7 @@ The data would then be interepreted by multiple obsevers doing the following job
 <br>DateTimeBasedMaxMinTemperatureSampleObserver: Would produce the Max and Min Temperature values over the whole sample. It even indicates to us when the weather reaches a new High or Low.
 <br>DateTimeBasedRealTimeSampleObserver: This Simulates the receiver or subscriber described in the problem statement.
 <br>Maven Build Output of which look like this:
-![picture alt](https://raw.githubusercontent.com/technicalyorker/commbank/master/CommonWealthBank/misc/build.png "Build Results")
+![picture alt](https://github.com/technicalyorker/misc/blob/master/CommonWealthBank/misc//build.png "Build Results")
 
 Explaination:
 -----------------------------------------------------------------------------
@@ -64,14 +64,14 @@ Time Series Extrapolation:
 
 The System uses TimeSeries Extrapolation to predict the temperature and relative humidity. Rain is a condition that occurs when the relative humidity reaches 100%.
 <br>The following output represents actual value against the calculated value using the time series extrapolation. This is to get a sence of the calculated values against the actual values.  
-![picture alt](https://raw.githubusercontent.com/technicalyorker/commbank/master/CommonWealthBank/misc/timeseries_calculated.png "Class Diagram")
+![picture alt](https://github.com/technicalyorker/misc/blob/master/CommonWealthBank/misc//timeseries_calculated.png "Class Diagram")
 <br>The following output represents Predicted Values of temperature and relative humidity.
-![picture alt](https://raw.githubusercontent.com/technicalyorker/commbank/master/CommonWealthBank/misc/timeseries_predicted.png "Class Diagram")
+![picture alt](https://github.com/technicalyorker/misc/blob/master/CommonWealthBank/misc//timeseries_predicted.png "Class Diagram")
 
 Class diagram (Main Classes Only):
 ----------------------------------
 
-![picture alt](https://raw.githubusercontent.com/technicalyorker/commbank/master/CommonWealthBank/misc/WeatherSimulator.gif "Class Diagram")
+![picture alt](https://github.com/technicalyorker/misc/blob/master/CommonWealthBank/misc//WeatherSimulator.gif "Class Diagram")
 
 Main class:
 -----------------------------------------------------------------------------
@@ -93,12 +93,12 @@ javadoc:
 
 mvn -e clean site
 <br>classes: target/site/apidocs/index.html<br>
-![picture alt](https://raw.githubusercontent.com/technicalyorker/commbank/master/CommonWealthBank/misc/javadoc.png "javadoc")
+![picture alt](https://github.com/technicalyorker/misc/blob/master/CommonWealthBank/misc//javadoc.png "javadoc")
 
 Tree View:
 -----------------------------------------------------------------------------
 
-![picture alt](https://raw.githubusercontent.com/technicalyorker/commbank/master/CommonWealthBank/misc/tree.png "Tree")
+![picture alt](https://github.com/technicalyorker/misc/blob/master/CommonWealthBank/misc//tree.png "Tree")
 
 Sources of Data:
 -----------------------------------------------------------------------------
