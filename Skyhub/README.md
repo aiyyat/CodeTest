@@ -7,13 +7,13 @@ Skyhub Digital Code Test
 ![Alt text](https://github.com/technicalyorker/misc/blob/master/Skyhub/parent/salestax/docs/SalesTax.gif "Class Diagram")
 <br>A "Good" is the super class of all purchasable items and defines the behaviours such as calcating the sales tax and total amount. There are basically groups of Goods from a Tax perspective. Goods with Basic Sales Tax and Goods free of basic sales tax. Yet there is an additional tax levied (decorated) as an Imported good.
 <br><br><b>source code:</b>https://github.com/technicalyorker/misc/blob/master/Skyhub/parent/salestax
-![Alt text](https://github.com/technicalyorker/misc/tree/master/Skyhub/docs/sales.png "Sales Tax")
+![Alt text](https://raw.githubusercontent.com/technicalyorker/misc/master/Skyhub/docs/sales.png "Sales Tax")
 <br><br>
 <b>Brackets:</b>
 The solution is iterating through the elements adding into a stack and checking the against the pushed contents when a terminating bracket if found.
 <br><b>source code:</b>
 https://github.com/technicalyorker/misc/blob/master/Skyhub/parent/brackets
-![Alt text](https://github.com/technicalyorker/misc/tree/master/Skyhub/docs/bracket.png "Brackets")
+![Alt text](https://raw.githubusercontent.com/technicalyorker/misc/master/Skyhub/docs/bracket.png "Brackets")
 <br><br>
 <b>Recommendations:</b>
 </br>The solution describes two different approaches to solving the problem.
@@ -24,4 +24,4 @@ https://github.com/technicalyorker/misc/blob/master/Skyhub/parent/brackets
 <br>
 <b>source code:</b>
 https://github.com/technicalyorker/misc/blob/master/Skyhub/parent/recommendations
-![Alt text](https://github.com/technicalyorker/misc/tree/master/Skyhub/docs/recommendation.png "Recommendations")
+![Alt text](https://raw.githubusercontent.com/technicalyorker/misc/master/Skyhub/docs/recommendation.png "Recommendations")
