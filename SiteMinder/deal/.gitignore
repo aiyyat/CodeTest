@@ -1,0 +1,25 @@
+.metadata/
+.recommenders/
+RemoteSystemsTempFiles/
+Servers/
+*/target/*
+*/.project
+*/.classpath
+*/bin/*
+*/.mvn/*
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+
+*/build.zip
+*/build/*
+*/logs/*
+*/build/*
+*/properties/*
+*/resources/deal/*

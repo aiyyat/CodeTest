@@ -1,0 +1,51 @@
+#!/bin/sh
+if [ -z "$1" ]; then
+echo "usage: ./build <env>"
+echo "env cannot be empty possible values as of today local & prod e.g ./build local"
+exit 1
+fi
+
+if [ "$1" != "local" -a "$1" != "prod" ];then
+echo "usage: ./build <env>"
+echo "env can take 2 possible values as of today local & prod e.g ./build local"
+exit 1
+fi
+env=$1
+cd ..
+
+rm -rf deal
+rm deal.zip
+mkdir -p deal/logs
+echo "#!/bin/bash" > deal/env.sh
+echo "export env=$1" >> deal/env.sh
+chmod +x deal/env.sh
+mkdir -p deal/properties
+rm -rf ../DealCommon/target/*.*
+rm -rf ../DealService/target/*.*
+rm -rf ../DealCommon/target/*.*
+
+cd ../DealCommon
+mvn -e clean install
+
+cd ../DealService
+mvn -e clean package -DskipTests
+cp target/dealservice.jar ../resources/deal
+
+cd ../DealWeb
+mvn -e clean package
+cp target/dealweb.jar ../resources/deal
+
+cd ../EmailService
+mvn -e clean package
+cp target/emailservice.jar ../resources/deal
+
+cd ../resources
+cp properties/*-$env.yml deal/properties
+
+cp scripts/start.txt deal/start
+cp scripts/stop.txt deal/stop
+
+chmod +x deal/start
+chmod +x deal/stop
+
+echo "Build Success"

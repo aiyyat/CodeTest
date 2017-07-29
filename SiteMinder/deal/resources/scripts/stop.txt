@@ -1,0 +1,11 @@
+#!/bin/sh
+if [ "$1" = "ds" ] || [ "$1" = "all" ]; then
+    ps -ef | grep dealservice.jar | awk '{print $2}' | xargs  kill -9
+fi
+if [ "$1" = "es" ] || [ "$1" = "all" ]; then
+    ps -ef | grep emailservice.jar | awk '{print $2}' | xargs  kill -9
+fi
+if [ "$1" = "dw" ] || [ "$1" = "all" ]; then
+    ps -ef | grep dealweb.jar | awk '{print $2}' | xargs  kill -9
+fi
+echo "Stopped..$1"

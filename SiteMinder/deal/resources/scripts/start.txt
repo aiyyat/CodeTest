@@ -1,0 +1,13 @@
+#!/bin/sh
+. ./env.sh
+echo "Running $1 for $env"
+if [ "$1" = "ds" ] || [ "$1" = "all" ]; then
+  java -jar dealservice.jar --spring.config.location=properties/dealservice-$env.yml > logs/dealservice-console.log 2>&1 &
+fi
+if [ "$1" = "es" ] || [ "$1" = "all" ]; then
+  java -jar emailservice.jar --spring.config.location=properties/emailservice-$env.yml > logs/emailservice-console.log 2>&1 &
+fi
+if [ "$1" = "dw" ] || [ "$1" = "all" ]; then
+  java -jar dealweb.jar --spring.config.location=properties/dealweb-$env.yml > logs/dealweb-console.log 2>&1 &
+fi
+echo "Started..$1"

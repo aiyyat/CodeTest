@@ -1,0 +1,7 @@
+zuul:
+  routes:
+    service:
+      path: /service/**
+      url: http://localhost:9001
+server:
+  port: 8080  

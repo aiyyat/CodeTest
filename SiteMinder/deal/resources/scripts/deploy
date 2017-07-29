@@ -1,0 +1,7 @@
+#!/bin/sh
+./deal prod
+zip -r deal.zip deal/
+
+scp -i deal.pem deal.zip ec2-user@52.62.205.161:~
+
+rm -rf deal/

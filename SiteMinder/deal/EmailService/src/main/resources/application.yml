@@ -1,0 +1,7 @@
+server:
+  contextPath: /email
+  port: 9002
+gunmail:
+  key: "key-fc503a5a30f361d22542c72f17c6d9e3"
+  from: "Mailgun Sandbox <postmaster@sandboxbe75f9faa11644058350d8a3962c043e.mailgun.org>"
+  endpointuri: "https://api.mailgun.net/v3/sandboxbe75f9faa11644058350d8a3962c043e.mailgun.org/messages"
