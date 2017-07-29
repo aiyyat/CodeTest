@@ -1,3 +1,7 @@
+One would probably have used docker container to host the microservices on AWS, but the company itself was on its baby steps to adopt docker when the problem was given to me and it wouldn't be the best of approach to use it. After solving the problem I did host the application on AWS with the view on a public subnet and the services/database on private subnet, provided the apps dns address for them to test.
+ 
+The question was as follows:
+
 Software Engineer challenge
 Create a service (backend + frontend) that accepts the necessary information and sends emails.
  
