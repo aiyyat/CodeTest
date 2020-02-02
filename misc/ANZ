@@ -1,0 +1,137 @@
+package com.anz.fxcalc;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.HashMap;
+import java.util.Map;
+
+public class App {
+    public static void main(String[] args) {
+        RatesCreator creator = new RatesCreator();
+        creator.addRate("AUD", "USD", "0.8371");
+        creator.addRate("CAD", "USD", "0.8711");
+        creator.addRate("USD", "CNY", "6.1715");
+        creator.addRate("EUR", "USD", "1.2315");
+        creator.addRate("GBP", "USD", "1.5683");
+        creator.addRate("NZD", "USD", "0.7750");
+        creator.addRate("USD", "JPY", "119.95");
+        creator.addRate("EUR", "CZK", "27.6028");
+        creator.addRate("EUR", "DKK", "7.4405");
+        creator.addRate("EUR", "NOK", "8.6651");
+
+        creator.addPair("AUD", "JPY", "USD");
+        creator.addPair("AUD", "DKK", "USD");
+        creator.addPair("USD", "DKK", "EUR");
+
+        System.out.println(creator.getRate("AUD", "USD").convert());
+        System.out.println(creator.getRate("AUD", "AUD").convert());
+        System.out.println(creator.getRate("AUD", "DKK").convert());
+        System.out.println(creator.getRate("AUD", "JPY").convert());
+        System.out.println(creator.getRate("JPY", "USD").convert());
+        System.out.println(creator.getRate("KRW", "FJD").convert());
+    }
+}
+
+class RatesCreator {
+    Map<String, ConversionPair> pair = new HashMap<>();
+
+    public ConversionPair getRate(String currencyA, String currencyB) {
+        String pairName = currencyA + currencyB;
+        if (currencyA.equals(currencyB)) return new ConversionPair(new Convertor(BigDecimal.ONE));
+        else if (!pair.containsKey(pairName)) throw new RateConversionException();
+        return pair.get(pairName);
+    }
+
+    public void addRate(String currencyA, String currencyB, String rateString) {
+        BigDecimal rate = new BigDecimal(rateString);
+        pair.put(currencyA + currencyB, new ConversionPair(new Convertor(rate)));
+        pair.put(currencyB + currencyA, new ConversionPair(new Convertor(BigDecimal.ONE.divide(rate, 10, RoundingMode.UP))));
+    }
+
+    public void addPair(String currencyA, String currencyB, String intermediate) {
+        ConversionPair a = addIfNoneAndGet(currencyA + intermediate);
+        ConversionPair b = addIfNoneAndGet(intermediate + currencyB);
+        ConversionPair ab = addIfNoneAndGet(currencyA + currencyB);
+        ab.getConvertor().setConvertorA(a);
+        ab.getConvertor().setConvertorB(b);
+    }
+
+    private ConversionPair addIfNoneAndGet(String key) {
+        ConversionPair conversionPair = pair.get(key);
+        if (conversionPair == null) {
+            conversionPair = new ConversionPair(new Convertor());
+            pair.put(key, conversionPair);
+        }
+        return conversionPair;
+    }
+}
+
+class ConversionPair {
+    Convertor convertor;
+
+    public Convertor getConvertor() {
+        return convertor;
+    }
+
+    public ConversionPair(Convertor convertor) {
+        this.convertor = convertor;
+    }
+
+    public BigDecimal convert() {
+        return convertor.getRate();
+    }
+}
+
+class Convertor {
+    BigDecimal rate;
+    ConversionPair convertorA;
+    ConversionPair convertorB;
+
+    public Convertor() {
+    }
+
+    public Convertor(BigDecimal rate) {
+        this.rate = rate;
+    }
+
+    public Convertor(ConversionPair convertorA, ConversionPair convertorB) {
+        this.convertorA = convertorA;
+        this.convertorB = convertorB;
+    }
+
+    public void setRate(BigDecimal rate) {
+        this.rate = rate;
+    }
+
+    public ConversionPair getConvertorA() {
+        return convertorA;
+    }
+
+    public void setConvertorA(ConversionPair convertorA) {
+        this.convertorA = convertorA;
+    }
+
+    public ConversionPair getConvertorB() {
+        return convertorB;
+    }
+
+    public void setConvertorB(ConversionPair convertorB) {
+        this.convertorB = convertorB;
+    }
+
+    public BigDecimal getRate() {
+        if (rate != null) {
+            return rate;
+        } else if (convertorA != null && convertorB != null) {
+            return convertorB.convert().multiply(convertorA.convert());
+        } else {
+            throw new RateConversionException();
+        }
+    }
+}
+
+class RateConversionException extends RuntimeException {
+    public RateConversionException() {
+        super("Unable to find rate");
+    }
+}
