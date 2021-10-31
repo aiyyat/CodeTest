@@ -8,10 +8,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * The type Buy n get m offer.
+ * The type Buy n get m offer. e.g. buy 1 get 1 free.
  */
-public class BuyNGetMOffer extends Offer {
-    private Item onesLikeThis;
+public class BuyNGetMAbstractOffer extends AbstractOffer {
+    private Item itemsLikeThisOne;
     private Integer n = 0;
     private Integer m = 0;
     private List<Item> items = new LinkedList<>();
@@ -23,21 +23,20 @@ public class BuyNGetMOffer extends Offer {
      * @param n       the n
      * @param m       the m
      */
-    public BuyNGetMOffer(Item forItem, Integer n, Integer m) {
-        this.onesLikeThis = forItem;
+    public BuyNGetMAbstractOffer(Item forItem, Integer n, Integer m) {
+        this.itemsLikeThisOne = forItem;
         this.n = n;
         this.m = m;
     }
 
     @Override
     public void resetOffer() {
-        this.n = 0;
-        this.m = 0;
+        this.items = new LinkedList<>();
     }
 
     @Override
     public Boolean matches(Item item) {
-        return item.getProductCode() == this.onesLikeThis.getProductCode();
+        return item.getProductsCode() == this.itemsLikeThisOne.getProductsCode();
     }
 
     @Override
@@ -47,7 +46,7 @@ public class BuyNGetMOffer extends Offer {
             if (items.size() == n) {
                 List<Item> freebies = new ArrayList<>();
                 for (int i = 0; i < m; i++) {
-                    freebies.add(onesLikeThis.clone());
+                    freebies.add(itemsLikeThisOne.clone());
                 }
                 bill.addFreebies(freebies);
                 resetOffer();

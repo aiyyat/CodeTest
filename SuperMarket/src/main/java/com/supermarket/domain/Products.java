@@ -3,9 +3,9 @@ package com.supermarket.domain;
 import lombok.Getter;
 
 /**
- * The enum Product code.
+ * The enum Product code. In the next version of SuperMarket this will be driven from an item table from a database.
  */
-public enum ProductCode {
+public enum Products {
     /**
      * The Gr 1.
      */
@@ -21,7 +21,7 @@ public enum ProductCode {
     @Getter
     private final String description;
 
-    ProductCode(String description) {
+    Products(String description) {
         this.description = description;
     }
 

@@ -1,13 +1,13 @@
 package com.supermarket.observer;
 
 import com.supermarket.domain.Item;
-import com.supermarket.offer.Offer;
+import com.supermarket.offer.AbstractOffer;
 
 /**
  * The interface Observer. Could have use the java Obeservable but did this as a chance to
  * demonstrate the internals of a simple Observables.
  */
-public interface Observer {
+public interface IBillingMachine {
     /**
      * Add item.
      *
@@ -20,5 +20,5 @@ public interface Observer {
      *
      * @param offer the offer
      */
-    public void subscribe(Offer offer);
+    public void subscribe(AbstractOffer offer);
 }

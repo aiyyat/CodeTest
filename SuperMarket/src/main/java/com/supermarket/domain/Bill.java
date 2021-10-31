@@ -12,10 +12,10 @@ import static com.supermarket.constants.SuperMarketConstants.STERLING;
 import static com.supermarket.util.PriceUtil.priceFormat;
 
 /**
- * The type Bill.
+ * The type Bill. This follows Domain Driven Design or the rich model as against anemic model.
  */
 public class Bill {
-    private final StringBuilder lineItems = new StringBuilder("Welcome to 'A Small Chain Of SuperMarket'");
+    private final StringBuilder lineItems = new StringBuilder("Welcome to 'A Small Chain Of \uD83D\uDED2 SuperMarket'");
     @Getter
     private List<Item> items = new ArrayList<>();
     @Getter
@@ -77,7 +77,7 @@ public class Bill {
                     .append("\nYou only pay: ")
                     .append(STERLING)
                     .append(priceFormat(customerPayAmountInPounds))
-                    .append("\n**Thank you for visiting us!**");
+                    .append("\n**Thank you for visiting us!**\n\n");
         } else {
             throw new FinalizedBillModificationException();
         }
@@ -92,7 +92,9 @@ public class Bill {
         if (!finalized) {
             throw new BillNotFinalizedException("Bill Has to be finalized to be able to print");
         }
-        return lineItems.toString();
+        String print = lineItems.toString();
+        System.out.println(print);
+        return print;
     }
 
     /**
@@ -106,8 +108,8 @@ public class Bill {
         return String.format("\n%s. %s %s: %s %s%s",
                 ++itemNumber,
                 description,
-                item.getProductCode().getCode(),
-                item.getProductCode().getDescription(),
+                item.getProductsCode().getCode(),
+                item.getProductsCode().getDescription(),
                 STERLING,
                 item.getCostInPounds()
         );
