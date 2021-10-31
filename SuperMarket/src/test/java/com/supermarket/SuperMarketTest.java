@@ -165,7 +165,6 @@ public class SuperMarketTest {
         billingConsole.addItem(coffee);
 
         bill.finalizeBill();
-        System.out.println(bill.print());
         TestCase.assertEquals("52.41", priceFormat(bill.getCustomerPayAmountInPounds()));
         TestCase.assertEquals(expected, bill.print());
     }
