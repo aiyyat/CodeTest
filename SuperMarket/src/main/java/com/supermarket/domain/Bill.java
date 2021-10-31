@@ -12,16 +12,17 @@ import static com.supermarket.constants.SuperMarketConstants.STERLING;
 import static com.supermarket.util.PriceUtil.priceFormat;
 
 /**
- * The type Bill.
+ * The type Bill. This follows Domain Driven Design or the rich model as against anemic model.
  */
 public class Bill {
-    private final StringBuilder lineItems = new StringBuilder("Welcome to 'A Small Chain Of SuperMarket'");
+    private final StringBuilder lineItems = new StringBuilder("Welcome to 'A Small Chain Of \uD83D\uDED2 SuperMarket'");
     @Getter
     private List<Item> items = new ArrayList<>();
     @Getter
     private BigDecimal netDiscountInPounds = new BigDecimal("0");
     @Getter
     private BigDecimal netCostInPounds = new BigDecimal("0");
+    private BigDecimal customerPayAmountInPounds = null;
     private int itemNumber = 0;
     // Just to demonstrate Exceptions.
     private Boolean finalized = false;
@@ -48,7 +49,7 @@ public class Bill {
     public void applyDiscount(String description, BigDecimal discountInPounds) {
         if (!finalized) {
             netDiscountInPounds = netDiscountInPounds.add(discountInPounds);
-            lineItems.append(" ").append(description).append(" -").append(priceFormat(discountInPounds)).append(STERLING);
+            lineItems.append(" ").append(description).append(" -").append(STERLING).append(priceFormat(discountInPounds));
         }
     }
 
@@ -71,21 +72,29 @@ public class Bill {
     public void finalizeBill() {
         if (!finalized) {
             finalized = true;
+            customerPayAmountInPounds = netCostInPounds.subtract(netDiscountInPounds);
             lineItems
                     .append("\nYou only pay: ")
-                    .append(priceFormat(netCostInPounds.subtract(netDiscountInPounds)))
                     .append(STERLING)
-                    .append("\n**Thank you for visiting us!**");
+                    .append(priceFormat(customerPayAmountInPounds))
+                    .append("\n**Thank you for visiting us!**\n\n");
         } else {
             throw new FinalizedBillModificationException();
         }
     }
 
+    /**
+     * Print string.
+     *
+     * @return the string
+     */
     public String print() {
         if (!finalized) {
             throw new BillNotFinalizedException("Bill Has to be finalized to be able to print");
         }
-        return lineItems.toString();
+        String print = lineItems.toString();
+        System.out.println(print);
+        return print;
     }
 
     /**
@@ -99,9 +108,19 @@ public class Bill {
         return String.format("\n%s. %s %s: %s %s%s",
                 ++itemNumber,
                 description,
-                item.getProductCode().getCode(),
-                item.getProductCode().getDescription(),
-                item.getCostInPounds(),
-                STERLING);
+                item.getProductsCode().getCode(),
+                item.getProductsCode().getDescription(),
+                STERLING,
+                item.getCostInPounds()
+        );
+    }
+
+    /**
+     * Gets customer pay amount in pounds.
+     *
+     * @return the customer pay amount in pounds
+     */
+    public BigDecimal getCustomerPayAmountInPounds() {
+        return customerPayAmountInPounds;
     }
 }

@@ -1,17 +1,19 @@
-package com.supermarket.domain.observer;
+package com.supermarket.observer;
 
 import com.supermarket.domain.Bill;
 import com.supermarket.domain.Item;
-import com.supermarket.domain.offer.Offer;
+import com.supermarket.offer.AbstractOffer;
 
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- * The type Billing machine. This is the Oberver and lets Offers Subscribe to it.
+ * The type Billing machine. This is the Subject in the Observer,
+ * this could be easily replaced by Java Observer pattern,
+ * however used this opportunity to demonstrate a simple observer implementation.
  */
-public class BillingMachine implements Observer {
-    private List<Offer> offers = new LinkedList<>();
+public class BillingMachine implements IBillingMachine {
+    private List<AbstractOffer> offers = new LinkedList<>();
     private Bill bill;
 
     /**
@@ -34,7 +36,7 @@ public class BillingMachine implements Observer {
     }
 
     @Override
-    public void subscribe(Offer offer) {
+    public void subscribe(AbstractOffer offer) {
         offers.add(offer);
     }
 }

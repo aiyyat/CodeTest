@@ -1,4 +1,4 @@
-package com.supermarket.domain.observer;
+package com.supermarket.observer;
 
 import com.supermarket.domain.Item;
 
@@ -6,9 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * The type Billing console. This is the Subject in the Observer.
+ * The type Billing console.
  */
-public class BillingConsole implements Subject {
+public class BillingConsole implements IBillingConsole {
     private BillingMachine billingMachine;
     private List<Item> items = new LinkedList<>();
 

@@ -1,4 +1,4 @@
-package com.supermarket.domain.offer;
+package com.supermarket.offer;
 
 import com.supermarket.domain.Bill;
 import com.supermarket.domain.Item;
@@ -10,14 +10,22 @@ import java.util.List;
 /**
  * The type Buy n get m offer.
  */
-public class BuyNGetMPoundOffDiscountOffer extends Offer {
+public class BuyNGetMPoundOffDiscountAbstractOffer extends AbstractOffer {
     private final String description;
     private Item onesLikeThis;
     private Integer n = 0;
     private BigDecimal m;
     private List<Item> items = new LinkedList<>();
 
-    public BuyNGetMPoundOffDiscountOffer(String description, Item forItem, Integer n, BigDecimal m) {
+    /**
+     * Instantiates a new Buy n get m pound off discount offer.
+     *
+     * @param description the description
+     * @param forItem     the for item
+     * @param n           the n
+     * @param m           the m
+     */
+    public BuyNGetMPoundOffDiscountAbstractOffer(String description, Item forItem, Integer n, BigDecimal m) {
         this.description = description;
         this.onesLikeThis = forItem;
         this.n = n;
@@ -26,7 +34,7 @@ public class BuyNGetMPoundOffDiscountOffer extends Offer {
 
     @Override
     public Boolean matches(Item item) {
-        return item.getProductCode() == this.onesLikeThis.getProductCode();
+        return item.getProductsCode() == this.onesLikeThis.getProductsCode();
     }
 
     @Override

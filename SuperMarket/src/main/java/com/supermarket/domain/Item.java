@@ -13,12 +13,12 @@ import java.math.BigDecimal;
 public class Item implements Cloneable {
     @Getter
     @NonFinal
-    private ProductCode productCode;
+    private Products productsCode;
     @Getter
     @NonFinal
     private BigDecimal costInPounds;
 
     public Item clone() {
-        return new Item(productCode, costInPounds);
+        return new Item(productsCode, costInPounds);
     }
 }
