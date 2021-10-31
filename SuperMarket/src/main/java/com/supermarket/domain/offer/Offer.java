@@ -1,7 +1,7 @@
 package com.supermarket.domain.offer;
 
+import com.supermarket.domain.Bill;
 import com.supermarket.domain.Item;
-import com.supermarket.domain.NetBill;
 import lombok.Getter;
 
 import java.util.LinkedList;
@@ -35,5 +35,5 @@ public abstract class Offer {
      *
      * @param item the item
      */
-    public abstract void apply(NetBill netBill, Item item);
+    public abstract void apply(Bill bill, Item item);
 }

@@ -1,7 +1,7 @@
 package com.supermarket.domain.offer;
 
+import com.supermarket.domain.Bill;
 import com.supermarket.domain.Item;
-import com.supermarket.domain.NetBill;
 
 import java.math.BigDecimal;
 import java.util.LinkedList;
@@ -32,13 +32,13 @@ public class BuyNGetMPercentOffDiscountOffer extends Offer {
     }
 
     @Override
-    public void apply(NetBill netBill, Item item) {
+    public void apply(Bill bill, Item item) {
         if (matches(item)) {
             items.add(item);
             if (items.size() == n) {
-                netBill.applyDiscount(description + " - Offer Kicks in!", amount.multiply(new BigDecimal(n)));
+                bill.applyDiscount(description + " - Offer Kicks in!", amount.multiply(new BigDecimal(n)));
             } else if (items.size() > n) {
-                netBill.applyDiscount(description, amount);
+                bill.applyDiscount(description, amount);
             }
         }
     }

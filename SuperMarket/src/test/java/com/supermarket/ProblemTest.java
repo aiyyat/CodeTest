@@ -19,7 +19,7 @@ import java.math.MathContext;
 /**
  * Unit test for simple App.
  */
-public class SuperMarketTest {
+public class ProblemTest {
     private final Item greenTea = new Item(ProductCode.GR1, new BigDecimal("3.11"));
     private final Item strawberries = new Item(ProductCode.SR1, new BigDecimal("5.00"));
     private final Item coffee = new Item(ProductCode.CF1, new BigDecimal("11.23"));
@@ -48,7 +48,28 @@ public class SuperMarketTest {
     }
 
     @Test
-    public void greenTeaOnOfferTest() {
+    public void basket1() {
+        final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +
+                "1. Pay GR1: Green Tea 3.11£\n" +
+                "2. Free! GR1: Green Tea 3.11£\n" +
+                "3. Pay SR1: Strawberries 5.00£\n" +
+                "4. Pay GR1: Green Tea 3.11£\n" +
+                "5. Pay CF1: Coffee 11.23£\n" +
+                "You only pay: 22.45£\n" +
+                "**Thank you for visiting us!**";
+
+        BillingConsole billingConsole = new BillingConsole(offerObserver);
+        billingConsole.addItem(greenTea);
+        billingConsole.addItem(strawberries);
+        billingConsole.addItem(greenTea);
+        billingConsole.addItem(coffee);
+
+        bill.finalizeBill();
+        TestCase.assertEquals(expected, bill.print());
+    }
+
+    @Test
+    public void basket2() {
         final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +
                 "1. Pay GR1: Green Tea 3.11£\n" +
                 "2. Free! GR1: Green Tea 3.11£\n" +
@@ -63,15 +84,20 @@ public class SuperMarketTest {
     }
 
     @Test
-    public void strawberryNoOfferTest() {
+    public void basket3() {
         final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +
                 "1. Pay SR1: Strawberries 5.00£\n" +
                 "2. Pay SR1: Strawberries 5.00£\n" +
-                "You only pay: 10.00£\n" +
+                "3. Pay GR1: Green Tea 3.11£\n" +
+                "4. Free! GR1: Green Tea 3.11£\n" +
+                "5. Pay SR1: Strawberries 5.00£ Buy 3 get .50%s discount - Offer Kicks in! -1.50£\n" +
+                "You only pay: 16.61£\n" +
                 "**Thank you for visiting us!**";
 
         BillingConsole billingConsole = new BillingConsole(offerObserver);
         billingConsole.addItem(strawberries);
+        billingConsole.addItem(strawberries);
+        billingConsole.addItem(greenTea);
         billingConsole.addItem(strawberries);
 
         bill.finalizeBill();
@@ -79,69 +105,23 @@ public class SuperMarketTest {
     }
 
     @Test
-    public void strawberryOnOfferTest() {
+    public void basket4() {
         final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +
-                "1. Pay SR1: Strawberries 5.00£\n" +
-                "2. Pay SR1: Strawberries 5.00£\n" +
-                "3. Pay SR1: Strawberries 5.00£ Buy 3 get .50%s discount - Offer Kicks in! -1.50£\n" +
-                "4. Pay SR1: Strawberries 5.00£ Buy 3 get .50%s discount -0.50£\n" +
-                "5. Pay SR1: Strawberries 5.00£ Buy 3 get .50%s discount -0.50£\n" +
-                "6. Pay SR1: Strawberries 5.00£ Buy 3 get .50%s discount -0.50£\n" +
-                "7. Pay SR1: Strawberries 5.00£ Buy 3 get .50%s discount -0.50£\n" +
-                "You only pay: 31.50£\n" +
+                "1. Pay GR1: Green Tea 3.11£\n" +
+                "2. Free! GR1: Green Tea 3.11£\n" +
+                "3. Pay CF1: Coffee 11.23£\n" +
+                "4. Pay SR1: Strawberries 5.00£\n" +
+                "5. Pay CF1: Coffee 11.23£\n" +
+                "6. Pay CF1: Coffee 11.23£ Buy 3+ and get all at 2/3 price Offer - Offer Kicks in! -11.23£\n" +
+                "You only pay: 30.57£\n" +
                 "**Thank you for visiting us!**";
 
         BillingConsole billingConsole = new BillingConsole(offerObserver);
+        billingConsole.addItem(greenTea);
+        billingConsole.addItem(coffee);
         billingConsole.addItem(strawberries);
-        billingConsole.addItem(strawberries);
-        billingConsole.addItem(strawberries);
-        billingConsole.addItem(strawberries);
-        billingConsole.addItem(strawberries);
-        billingConsole.addItem(strawberries);
-        billingConsole.addItem(strawberries);
-
-        bill.finalizeBill();
-        TestCase.assertEquals(expected, bill.print());
-    }
-
-    @Test
-    public void coffeeNoOfferTest() {
-        final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +
-                "1. Pay CF1: Coffee 11.23£\n" +
-                "2. Pay CF1: Coffee 11.23£\n" +
-                "You only pay: 22.46£\n" +
-                "**Thank you for visiting us!**";
-
-        BillingConsole billingConsole = new BillingConsole(offerObserver);
         billingConsole.addItem(coffee);
         billingConsole.addItem(coffee);
-
-        bill.finalizeBill();
-        TestCase.assertEquals(expected, bill.print());
-    }
-
-    @Test
-    public void coffeeOnOfferTest() {
-        final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +
-                "1. Pay CF1: Coffee 11.23£\n" +
-                "2. Pay CF1: Coffee 11.23£\n" +
-                "3. Pay CF1: Coffee 11.23£ Buy 3+ and get all at 2/3 price Offer - Offer Kicks in! -11.23£\n" +
-                "4. Pay CF1: Coffee 11.23£ Buy 3+ and get all at 2/3 price Offer -3.74£\n" +
-                "5. Pay CF1: Coffee 11.23£ Buy 3+ and get all at 2/3 price Offer -3.74£\n" +
-                "6. Pay CF1: Coffee 11.23£ Buy 3+ and get all at 2/3 price Offer -3.74£\n" +
-                "7. Pay CF1: Coffee 11.23£ Buy 3+ and get all at 2/3 price Offer -3.74£\n" +
-                "You only pay: 52.41£\n" +
-                "**Thank you for visiting us!**";
-
-        BillingConsole billingConsole = new BillingConsole(offerObserver);
-        billingConsole.addItem(coffee);
-        billingConsole.addItem(coffee);
-        billingConsole.addItem(coffee);
-        billingConsole.addItem(coffee);
-        billingConsole.addItem(coffee);
-        billingConsole.addItem(coffee);
-        billingConsole.addItem(coffee);
-
         bill.finalizeBill();
         TestCase.assertEquals(expected, bill.print());
     }

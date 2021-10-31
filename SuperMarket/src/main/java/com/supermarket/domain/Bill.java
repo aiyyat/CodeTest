@@ -1,0 +1,107 @@
+package com.supermarket.domain;
+
+import com.supermarket.exception.BillNotFinalizedException;
+import com.supermarket.exception.FinalizedBillModificationException;
+import lombok.Getter;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.supermarket.constants.SuperMarketConstants.STERLING;
+import static com.supermarket.util.PriceUtil.priceFormat;
+
+/**
+ * The type Bill.
+ */
+public class Bill {
+    private final StringBuilder lineItems = new StringBuilder("Welcome to 'A Small Chain Of SuperMarket'");
+    @Getter
+    private List<Item> items = new ArrayList<>();
+    @Getter
+    private BigDecimal netDiscountInPounds = new BigDecimal("0");
+    @Getter
+    private BigDecimal netCostInPounds = new BigDecimal("0");
+    private int itemNumber = 0;
+    // Just to demonstrate Exceptions.
+    private Boolean finalized = false;
+
+    /**
+     * Add item.
+     *
+     * @param item the item
+     */
+    public void addItem(Item item) {
+        if (!finalized) {
+            items.add(item);
+            netCostInPounds = netCostInPounds.add(item.getCostInPounds());
+            lineItems.append(itemLineItem("Pay", item));
+        }
+    }
+
+    /**
+     * Apply discount.
+     *
+     * @param description      the description
+     * @param discountInPounds the discount in pounds
+     */
+    public void applyDiscount(String description, BigDecimal discountInPounds) {
+        if (!finalized) {
+            netDiscountInPounds = netDiscountInPounds.add(discountInPounds);
+            lineItems.append(" ").append(description).append(" -").append(priceFormat(discountInPounds)).append(STERLING);
+        }
+    }
+
+    /**
+     * Add freebies anytime at the cashier's responsibility to make unhappy customers happy.
+     *
+     * @param freebies the freebies
+     */
+    public void addFreebies(List<Item> freebies) {
+        freebies.forEach(item -> {
+            lineItems.append(itemLineItem("Free!", item));
+        });
+    }
+
+    /**
+     * Finalize bill string.
+     *
+     * @return the string
+     */
+    public void finalizeBill() {
+        if (!finalized) {
+            finalized = true;
+            lineItems
+                    .append("\nYou only pay: ")
+                    .append(priceFormat(netCostInPounds.subtract(netDiscountInPounds)))
+                    .append(STERLING)
+                    .append("\n**Thank you for visiting us!**");
+        } else {
+            throw new FinalizedBillModificationException();
+        }
+    }
+
+    public String print() {
+        if (!finalized) {
+            throw new BillNotFinalizedException("Bill Has to be finalized to be able to print");
+        }
+        return lineItems.toString();
+    }
+
+    /**
+     * Item line item string.
+     *
+     * @param description the description
+     * @param item        the item
+     * @return the string
+     */
+    public String itemLineItem(String description, Item item) {
+        return String.format("\n%s. %s %s: %s %s%s",
+                ++itemNumber,
+                description,
+                item.getProductCode().getCode(),
+                item.getProductCode().getDescription(),
+                item.getCostInPounds(),
+                STERLING);
+    }
+}

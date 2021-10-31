@@ -1,7 +1,7 @@
 package com.supermarket.domain.offer;
 
+import com.supermarket.domain.Bill;
 import com.supermarket.domain.Item;
-import com.supermarket.domain.NetBill;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -34,7 +34,7 @@ public class BuyNGetMOffer extends Offer {
     }
 
     @Override
-    public void apply(NetBill netBill, Item item) {
+    public void apply(Bill bill, Item item) {
         if (matches(item)) {
             items.add(item);
             if (items.size() == n) {
@@ -42,7 +42,7 @@ public class BuyNGetMOffer extends Offer {
                 for (int i = 0; i < m; i++) {
                     freebies.add(onesLikeThis.clone());
                 }
-                netBill.addFreebies(freebies);
+                bill.addFreebies(freebies);
                 resetOffer();
             }
         }
