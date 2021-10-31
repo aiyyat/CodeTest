@@ -1,5 +1,23 @@
 # SuperMarkets
 
+## Getting started
+
+To get started install the following
+
+* JDK 8+
+* maven
+* Intellij Idea (optional)
+
+Then,
+
+```shell
+$ mvn -e clean install
+$ mvn -e test
+```
+
+or run it in your favourite IDE
+![alt text](misc/screenshot.png)
+
 ## FAQ
 
 ### Why did you implement your own Billing Observer?
