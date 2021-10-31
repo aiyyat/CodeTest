@@ -1,7 +1,7 @@
-package com.supermarket.domain.observer;
+package com.supermarket.observer;
 
 import com.supermarket.domain.Item;
-import com.supermarket.domain.offer.Offer;
+import com.supermarket.offer.Offer;
 
 /**
  * The interface Observer. Could have use the java Obeservable but did this as a chance to

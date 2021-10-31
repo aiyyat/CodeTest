@@ -1,4 +1,4 @@
-package com.supermarket.domain.observer;
+package com.supermarket.observer;
 
 import com.supermarket.domain.Item;
 

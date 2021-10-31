@@ -1,4 +1,4 @@
-package com.supermarket.domain.offer;
+package com.supermarket.offer;
 
 import com.supermarket.domain.Bill;
 import com.supermarket.domain.Item;

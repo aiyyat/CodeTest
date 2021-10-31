@@ -48,7 +48,7 @@ public class Bill {
     public void applyDiscount(String description, BigDecimal discountInPounds) {
         if (!finalized) {
             netDiscountInPounds = netDiscountInPounds.add(discountInPounds);
-            lineItems.append(" ").append(description).append(" -").append(priceFormat(discountInPounds)).append(STERLING);
+            lineItems.append(" ").append(description).append(" -").append(STERLING).append(priceFormat(discountInPounds));
         }
     }
 
@@ -73,8 +73,8 @@ public class Bill {
             finalized = true;
             lineItems
                     .append("\nYou only pay: ")
-                    .append(priceFormat(netCostInPounds.subtract(netDiscountInPounds)))
                     .append(STERLING)
+                    .append(priceFormat(netCostInPounds.subtract(netDiscountInPounds)))
                     .append("\n**Thank you for visiting us!**");
         } else {
             throw new FinalizedBillModificationException();
@@ -101,7 +101,8 @@ public class Bill {
                 description,
                 item.getProductCode().getCode(),
                 item.getProductCode().getDescription(),
-                item.getCostInPounds(),
-                STERLING);
+                STERLING,
+                item.getCostInPounds()
+        );
     }
 }

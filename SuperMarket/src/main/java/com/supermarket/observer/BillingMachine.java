@@ -1,8 +1,8 @@
-package com.supermarket.domain.observer;
+package com.supermarket.observer;
 
 import com.supermarket.domain.Bill;
 import com.supermarket.domain.Item;
-import com.supermarket.domain.offer.Offer;
+import com.supermarket.offer.Offer;
 
 import java.util.LinkedList;
 import java.util.List;

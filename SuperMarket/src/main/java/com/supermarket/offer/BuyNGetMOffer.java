@@ -1,27 +1,31 @@
-package com.supermarket.domain.offer;
+package com.supermarket.offer;
 
 import com.supermarket.domain.Bill;
 import com.supermarket.domain.Item;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * The type Buy n get m offer.
  */
-public class BuyNGetMPoundOffDiscountOffer extends Offer {
-    private final String description;
+public class BuyNGetMOffer extends Offer {
     private Item onesLikeThis;
     private Integer n = 0;
-    private BigDecimal m;
+    private Integer m = 0;
     private List<Item> items = new LinkedList<>();
 
-    public BuyNGetMPoundOffDiscountOffer(String description, Item forItem, Integer n, BigDecimal m) {
-        this.description = description;
+    public BuyNGetMOffer(Item forItem, Integer n, Integer m) {
         this.onesLikeThis = forItem;
         this.n = n;
         this.m = m;
+    }
+
+    @Override
+    public void resetOffer() {
+        this.n = 0;
+        this.m = 0;
     }
 
     @Override
@@ -34,10 +38,12 @@ public class BuyNGetMPoundOffDiscountOffer extends Offer {
         if (matches(item)) {
             items.add(item);
             if (items.size() == n) {
-                final BigDecimal amount = m.multiply(new BigDecimal(n));
-                bill.applyDiscount(description + " - Offer Kicks in!", amount);
-            } else if (items.size() > n) {
-                bill.applyDiscount(description, m);
+                List<Item> freebies = new ArrayList<>();
+                for (int i = 0; i < m; i++) {
+                    freebies.add(onesLikeThis.clone());
+                }
+                bill.addFreebies(freebies);
+                resetOffer();
             }
         }
     }

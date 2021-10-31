@@ -3,12 +3,12 @@ package com.supermarket;
 import com.supermarket.domain.Bill;
 import com.supermarket.domain.Item;
 import com.supermarket.domain.ProductCode;
-import com.supermarket.domain.observer.BillingConsole;
-import com.supermarket.domain.observer.BillingMachine;
-import com.supermarket.domain.offer.BuyNGetMOffer;
-import com.supermarket.domain.offer.BuyNGetMPercentOffDiscountOffer;
-import com.supermarket.domain.offer.BuyNGetMPoundOffDiscountOffer;
-import com.supermarket.domain.offer.Offer;
+import com.supermarket.observer.BillingConsole;
+import com.supermarket.observer.BillingMachine;
+import com.supermarket.offer.BuyNGetMOffer;
+import com.supermarket.offer.BuyNGetMPercentOffDiscountOffer;
+import com.supermarket.offer.BuyNGetMPoundOffDiscountOffer;
+import com.supermarket.offer.Offer;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,9 +50,9 @@ public class SuperMarketTest {
     @Test
     public void greenTeaOnOfferTest() {
         final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +
-                "1. Pay GR1: Green Tea 3.11£\n" +
-                "2. Free! GR1: Green Tea 3.11£\n" +
-                "You only pay: 3.11£\n" +
+                "1. Pay GR1: Green Tea £3.11\n" +
+                "2. Free! GR1: Green Tea £3.11\n" +
+                "You only pay: £3.11\n" +
                 "**Thank you for visiting us!**";
 
         BillingConsole billingConsole = new BillingConsole(offerObserver);
@@ -65,9 +65,9 @@ public class SuperMarketTest {
     @Test
     public void strawberryNoOfferTest() {
         final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +
-                "1. Pay SR1: Strawberries 5.00£\n" +
-                "2. Pay SR1: Strawberries 5.00£\n" +
-                "You only pay: 10.00£\n" +
+                "1. Pay SR1: Strawberries £5.00\n" +
+                "2. Pay SR1: Strawberries £5.00\n" +
+                "You only pay: £10.00\n" +
                 "**Thank you for visiting us!**";
 
         BillingConsole billingConsole = new BillingConsole(offerObserver);
@@ -81,14 +81,14 @@ public class SuperMarketTest {
     @Test
     public void strawberryOnOfferTest() {
         final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +
-                "1. Pay SR1: Strawberries 5.00£\n" +
-                "2. Pay SR1: Strawberries 5.00£\n" +
-                "3. Pay SR1: Strawberries 5.00£ Buy 3 get .50%s discount - Offer Kicks in! -1.50£\n" +
-                "4. Pay SR1: Strawberries 5.00£ Buy 3 get .50%s discount -0.50£\n" +
-                "5. Pay SR1: Strawberries 5.00£ Buy 3 get .50%s discount -0.50£\n" +
-                "6. Pay SR1: Strawberries 5.00£ Buy 3 get .50%s discount -0.50£\n" +
-                "7. Pay SR1: Strawberries 5.00£ Buy 3 get .50%s discount -0.50£\n" +
-                "You only pay: 31.50£\n" +
+                "1. Pay SR1: Strawberries £5.00\n" +
+                "2. Pay SR1: Strawberries £5.00\n" +
+                "3. Pay SR1: Strawberries £5.00 Buy 3 get .50%s discount - Offer Kicks in! -£1.50\n" +
+                "4. Pay SR1: Strawberries £5.00 Buy 3 get .50%s discount -£0.50\n" +
+                "5. Pay SR1: Strawberries £5.00 Buy 3 get .50%s discount -£0.50\n" +
+                "6. Pay SR1: Strawberries £5.00 Buy 3 get .50%s discount -£0.50\n" +
+                "7. Pay SR1: Strawberries £5.00 Buy 3 get .50%s discount -£0.50\n" +
+                "You only pay: £31.50\n" +
                 "**Thank you for visiting us!**";
 
         BillingConsole billingConsole = new BillingConsole(offerObserver);
@@ -107,9 +107,9 @@ public class SuperMarketTest {
     @Test
     public void coffeeNoOfferTest() {
         final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +
-                "1. Pay CF1: Coffee 11.23£\n" +
-                "2. Pay CF1: Coffee 11.23£\n" +
-                "You only pay: 22.46£\n" +
+                "1. Pay CF1: Coffee £11.23\n" +
+                "2. Pay CF1: Coffee £11.23\n" +
+                "You only pay: £22.46\n" +
                 "**Thank you for visiting us!**";
 
         BillingConsole billingConsole = new BillingConsole(offerObserver);
@@ -123,14 +123,14 @@ public class SuperMarketTest {
     @Test
     public void coffeeOnOfferTest() {
         final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +
-                "1. Pay CF1: Coffee 11.23£\n" +
-                "2. Pay CF1: Coffee 11.23£\n" +
-                "3. Pay CF1: Coffee 11.23£ Buy 3+ and get all at 2/3 price Offer - Offer Kicks in! -11.23£\n" +
-                "4. Pay CF1: Coffee 11.23£ Buy 3+ and get all at 2/3 price Offer -3.74£\n" +
-                "5. Pay CF1: Coffee 11.23£ Buy 3+ and get all at 2/3 price Offer -3.74£\n" +
-                "6. Pay CF1: Coffee 11.23£ Buy 3+ and get all at 2/3 price Offer -3.74£\n" +
-                "7. Pay CF1: Coffee 11.23£ Buy 3+ and get all at 2/3 price Offer -3.74£\n" +
-                "You only pay: 52.41£\n" +
+                "1. Pay CF1: Coffee £11.23\n" +
+                "2. Pay CF1: Coffee £11.23\n" +
+                "3. Pay CF1: Coffee £11.23 Buy 3+ and get all at 2/3 price Offer - Offer Kicks in! -£11.23\n" +
+                "4. Pay CF1: Coffee £11.23 Buy 3+ and get all at 2/3 price Offer -£3.74\n" +
+                "5. Pay CF1: Coffee £11.23 Buy 3+ and get all at 2/3 price Offer -£3.74\n" +
+                "6. Pay CF1: Coffee £11.23 Buy 3+ and get all at 2/3 price Offer -£3.74\n" +
+                "7. Pay CF1: Coffee £11.23 Buy 3+ and get all at 2/3 price Offer -£3.74\n" +
+                "You only pay: £52.41\n" +
                 "**Thank you for visiting us!**";
 
         BillingConsole billingConsole = new BillingConsole(offerObserver);
