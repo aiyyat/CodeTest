@@ -16,6 +16,8 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
+import static com.supermarket.util.PriceUtil.priceFormat;
+
 /**
  * Unit test for simple App.
  */
@@ -38,6 +40,9 @@ public class SuperMarketTest {
     private Bill bill;
     private BillingMachine offerObserver;
 
+    /**
+     * Sets .
+     */
     @Before
     public void setup() {
         bill = new Bill();
@@ -47,6 +52,9 @@ public class SuperMarketTest {
         offerObserver.subscribe(buy3GetAtTwoThirdsOfferForCoffee);
     }
 
+    /**
+     * Green tea on offer test.
+     */
     @Test
     public void greenTeaOnOfferTest() {
         final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +
@@ -62,6 +70,9 @@ public class SuperMarketTest {
         TestCase.assertEquals(expected, bill.print());
     }
 
+    /**
+     * Strawberry no offer test.
+     */
     @Test
     public void strawberryNoOfferTest() {
         final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +
@@ -78,6 +89,9 @@ public class SuperMarketTest {
         TestCase.assertEquals(expected, bill.print());
     }
 
+    /**
+     * Strawberry on offer test.
+     */
     @Test
     public void strawberryOnOfferTest() {
         final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +
@@ -104,6 +118,9 @@ public class SuperMarketTest {
         TestCase.assertEquals(expected, bill.print());
     }
 
+    /**
+     * Coffee no offer test.
+     */
     @Test
     public void coffeeNoOfferTest() {
         final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +
@@ -120,6 +137,9 @@ public class SuperMarketTest {
         TestCase.assertEquals(expected, bill.print());
     }
 
+    /**
+     * Coffee on offer test.
+     */
     @Test
     public void coffeeOnOfferTest() {
         final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +
@@ -143,6 +163,7 @@ public class SuperMarketTest {
         billingConsole.addItem(coffee);
 
         bill.finalizeBill();
+        TestCase.assertEquals("52.41", priceFormat(bill.getCustomerPayAmountInPounds()));
         TestCase.assertEquals(expected, bill.print());
     }
 }

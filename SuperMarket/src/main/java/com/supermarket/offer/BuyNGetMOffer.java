@@ -16,6 +16,13 @@ public class BuyNGetMOffer extends Offer {
     private Integer m = 0;
     private List<Item> items = new LinkedList<>();
 
+    /**
+     * Instantiates a new Buy n get m offer.
+     *
+     * @param forItem the for item
+     * @param n       the n
+     * @param m       the m
+     */
     public BuyNGetMOffer(Item forItem, Integer n, Integer m) {
         this.onesLikeThis = forItem;
         this.n = n;

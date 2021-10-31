@@ -38,6 +38,9 @@ public class ProblemTest {
     private Bill bill;
     private BillingMachine offerObserver;
 
+    /**
+     * Sets .
+     */
     @Before
     public void setup() {
         bill = new Bill();
@@ -47,6 +50,9 @@ public class ProblemTest {
         offerObserver.subscribe(buy3GetAtTwoThirdsOfferForCoffee);
     }
 
+    /**
+     * Basket 1.
+     */
     @Test
     public void basket1() {
         final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +
@@ -68,6 +74,9 @@ public class ProblemTest {
         TestCase.assertEquals(expected, bill.print());
     }
 
+    /**
+     * Basket 2.
+     */
     @Test
     public void basket2() {
         final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +
@@ -83,6 +92,9 @@ public class ProblemTest {
         TestCase.assertEquals(expected, bill.print());
     }
 
+    /**
+     * Basket 3.
+     */
     @Test
     public void basket3() {
         final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +
@@ -104,6 +116,9 @@ public class ProblemTest {
         TestCase.assertEquals(expected, bill.print());
     }
 
+    /**
+     * Basket 4.
+     */
     @Test
     public void basket4() {
         final String expected = "Welcome to 'A Small Chain Of SuperMarket'\n" +

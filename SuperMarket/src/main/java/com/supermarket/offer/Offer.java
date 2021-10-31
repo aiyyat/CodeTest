@@ -33,6 +33,7 @@ public abstract class Offer {
     /**
      * Apply.
      *
+     * @param bill the bill
      * @param item the item
      */
     public abstract void apply(Bill bill, Item item);

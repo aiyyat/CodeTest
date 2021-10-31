@@ -22,6 +22,7 @@ public class Bill {
     private BigDecimal netDiscountInPounds = new BigDecimal("0");
     @Getter
     private BigDecimal netCostInPounds = new BigDecimal("0");
+    private BigDecimal customerPayAmountInPounds = null;
     private int itemNumber = 0;
     // Just to demonstrate Exceptions.
     private Boolean finalized = false;
@@ -71,16 +72,22 @@ public class Bill {
     public void finalizeBill() {
         if (!finalized) {
             finalized = true;
+            customerPayAmountInPounds = netCostInPounds.subtract(netDiscountInPounds);
             lineItems
                     .append("\nYou only pay: ")
                     .append(STERLING)
-                    .append(priceFormat(netCostInPounds.subtract(netDiscountInPounds)))
+                    .append(priceFormat(customerPayAmountInPounds))
                     .append("\n**Thank you for visiting us!**");
         } else {
             throw new FinalizedBillModificationException();
         }
     }
 
+    /**
+     * Print string.
+     *
+     * @return the string
+     */
     public String print() {
         if (!finalized) {
             throw new BillNotFinalizedException("Bill Has to be finalized to be able to print");
@@ -104,5 +111,14 @@ public class Bill {
                 STERLING,
                 item.getCostInPounds()
         );
+    }
+
+    /**
+     * Gets customer pay amount in pounds.
+     *
+     * @return the customer pay amount in pounds
+     */
+    public BigDecimal getCustomerPayAmountInPounds() {
+        return customerPayAmountInPounds;
     }
 }

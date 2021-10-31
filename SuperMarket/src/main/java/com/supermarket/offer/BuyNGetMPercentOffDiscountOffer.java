@@ -18,6 +18,14 @@ public class BuyNGetMPercentOffDiscountOffer extends Offer {
     private BigDecimal amount;
     private List<Item> items = new LinkedList<>();
 
+    /**
+     * Instantiates a new Buy n get m percent off discount offer.
+     *
+     * @param description the description
+     * @param forItem     the for item
+     * @param n           the n
+     * @param m           the m
+     */
     public BuyNGetMPercentOffDiscountOffer(String description, Item forItem, Integer n, BigDecimal m) {
         this.description = description;
         this.onesLikeThis = forItem;
